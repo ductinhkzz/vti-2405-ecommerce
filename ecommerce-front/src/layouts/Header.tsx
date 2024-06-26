@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 import { NAVIGATIONS } from '@/constants';
 import { LogoIcon } from '@/components';
@@ -12,10 +13,10 @@ const Header = () => {
     <header className='absolute inset-x-0 top-0 z-50'>
       <nav className='flex items-center justify-between p-6 lg:px-8' aria-label='Global'>
         <div className='flex lg:flex-1'>
-          <a href='#' className='-m-1.5 p-1.5'>
+          <Link to='/' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Duxiana</span>
             <LogoIcon className='h-6 w-auto' />
-          </a>
+          </Link>
         </div>
         <div className='flex lg:hidden'>
           <button
@@ -29,9 +30,9 @@ const Header = () => {
         </div>
         <div className='hidden lg:flex lg:gap-x-12'>
           {NAVIGATIONS.map((item) => (
-            <a key={item.name} href={item.href} className='text-sm font-semibold leading-6 text-gray-900'>
+            <Link key={item.name} to={item.href} className='text-sm font-semibold leading-6 text-gray-900'>
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
         <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
