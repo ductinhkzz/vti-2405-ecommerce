@@ -3,11 +3,11 @@ import { Button } from '../Button';
 const HeaderDivider = () => {
   return (
     <div className='flex justify-center my-16 md:my-24'>
-      <div className='container w-xl flex 2xl:px-24 sm:px-8 px-4 md:flex-row flex-col gap-y-8'>
+      <div className='container w-xl flex 2xl:px-24 sm:px-8 px-4 md:flex-row flex-col gap-y-8 items-center'>
         <div className='flex-auto lg:basis-2/5 basis-4/12'>
           <h2 className='text-3xl'>Next-Level Comfort</h2>
         </div>
-        <div className='flex flex-col flex-auto lg:basis-3/5 basis-8/12 gap-8 2xl:ps-12 2xl:pe-24'>
+        <div className='flex flex-col flex-auto lg:basis-3/5 basis-8/12 gap-8 2xl:ps-12 2xl:pe-24 items-center'>
           <p className='sm:text-sm text-xs font-light'>
             Enjoying the comfort of your bed is the ultimate luxury. Our goal is to provide you with the best possible
             experience of rest. We achieve this through innovation. DUX technology enables the highest quality sleep,

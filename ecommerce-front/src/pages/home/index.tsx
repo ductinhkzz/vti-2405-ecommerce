@@ -1,120 +1,100 @@
-import { ArrowRightCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
-import { useKeenSlider } from 'keen-slider/react';
-import { MouseEvent, useMemo, useState } from 'react';
-
-import { HeaderDivider, HeroBanerSection, Card, Button, HeroSection } from '@/components';
+import { ICard } from '@/types';
+import {
+  HeaderDivider,
+  HeroBanerSection,
+  HeroSection,
+  CardSliderSection,
+  CardBlockHeader,
+  HeroCardBlockSection,
+} from '@/components';
+import videoUrl from '@/assets/images/hero-video.mp4';
 import cardImg1 from '@/assets/images/card-1.jpg';
 import cardImg2 from '@/assets/images/card-2.jpg';
-import videoUrl from '@/assets/images/hero-video.mp4';
-import { useWindowSize } from '@/hooks';
-
-const BREAK_POINT = {
-  xl: 1280,
-  md: 768,
-  sm: 640,
-};
+import cardImg3 from '@/assets/images/card-3.jpg';
+import cardImg4 from '@/assets/images/card-4.jpg';
+import heroCardImg1 from '@/assets/images/hero-card-1.jpg';
+import heroCardImg2 from '@/assets/images/hero-card-2.jpg';
 
 const Home = () => {
-  const windowSize = useWindowSize();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
-
-  const perView = useMemo(() => {
-    if (windowSize.width <= BREAK_POINT.sm) {
-      return 1;
-    }
-
-    if (windowSize.width <= BREAK_POINT.md) {
-      return 2;
-    }
-
-    if (windowSize.width <= BREAK_POINT.xl) {
-      return 3;
-    }
-
-    return 4;
-  }, [windowSize.width]);
-
-  const [sliderRef, instanceRef] = useKeenSlider({
-    initial: 0,
-    slides: {
-      perView,
+  const cards: ICard[] = [
+    {
+      id: '1',
+      title: 'Travel Pillow',
+      description: 'Portable Luxury Down Pillow: $178',
+      image: cardImg1,
     },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
+    {
+      id: '2',
+      title: 'Sateen Sheet Set',
+      description: 'Four Colors Starting at $625',
+      image: cardImg2,
     },
-    created() {
-      setLoaded(true);
+    {
+      id: '3',
+      title: 'Micro-Spring Pillow',
+      description: 'Starting At $380',
+      image: cardImg3,
     },
-  });
+    {
+      id: '4',
+      title: 'Down Starter Set',
+      description: 'Barcelona Light Duvet and 2 Oslo Pillows Starting at $1,760',
+      image: cardImg4,
+    },
+    {
+      id: '5',
+      title: 'Travel Pillow',
+      description: 'Portable Luxury Down Pillow: $178',
+      image: cardImg1,
+    },
+    {
+      id: '6',
+      title: 'Sateen Sheet Set',
+      description: 'Four Colors Starting at $625',
+      image: cardImg2,
+    },
+    {
+      id: '7',
+      title: 'Micro-Spring Pillow',
+      description: 'Starting At $380',
+      image: cardImg3,
+    },
+    {
+      id: '8',
+      title: 'Down Starter Set',
+      description: 'Barcelona Light Duvet and 2 Oslo Pillows Starting at $1,760',
+      image: cardImg4,
+    },
+  ];
 
-  const onClickPre = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    instanceRef.current?.prev();
-  };
-
-  const onClickNext = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    instanceRef.current?.next();
-  };
+  const heroCards: ICard[] = [
+    {
+      id: '1',
+      title: 'Scandinavian Design',
+      description:
+        'As a fourth generation family owned company, our only responsibilities are to our customers, to the quality and longevity of our product and to the health of the planet.',
+      image: heroCardImg1,
+      btn: {
+        text: 'Scandinavian Design',
+      },
+      isTextTop: true,
+    },
+    {
+      id: '2',
+      title: 'Environmental Impact',
+      description: `High quality materials, innovative component design and Oeko Tex 100 Standard Certified. It's in our nature.`,
+      image: heroCardImg2,
+      btn: {
+        text: 'Read about sustainable awareness',
+      },
+    },
+  ];
 
   return (
     <>
       <HeroBanerSection />
       <HeaderDivider />
-      <div className='flex justify-center my-16 md:my-24'>
-        <div className='flex flex-col justify-center items-center gap-2'>
-          <h2 className='text-extrabold text-lg tracking-widest'>The DUXIANA Online Marketplace</h2>
-          <p className='mb-2 w-full flex justify-center items-center'>
-            <Button color='secondary' variant='text' className='flex gap-x-1 items-center text-xs'>
-              View all
-              <ArrowRightCircleIcon className='h-4 w-4 color-gray-900' />
-            </Button>
-          </p>
-          <div className='container sm:w-xl w-screen block'>
-            {loaded && instanceRef.current && (
-              <div className='flex justify-end gap-x-2 px -2'>
-                <Button
-                  color='secondary'
-                  className='p-2 rounded-full'
-                  onClick={onClickPre}
-                  disabled={currentSlide === 0}
-                >
-                  <ChevronLeftIcon className='h-5 w-5' />
-                </Button>
-                <Button
-                  color='secondary'
-                  className='p-2 rounded-full'
-                  onClick={onClickNext}
-                  disabled={currentSlide === instanceRef.current.track.details.slides.length - perView}
-                >
-                  <ChevronRightIcon className='h-5 w-5' />
-                </Button>
-              </div>
-            )}
-            <div ref={sliderRef} className='keen-slider'>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Travel Pillow' description='Portable Luxury Down Pillow: $178' image={cardImg1} />
-              </div>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Sateen Sheet Set' description='Four Colors Starting at $625' image={cardImg2} />
-              </div>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Travel Pillow' description='Portable Luxury Down Pillow: $178' image={cardImg1} />
-              </div>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Sateen Sheet Set' description='Four Colors Starting at $625' image={cardImg2} />
-              </div>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Travel Pillow' description='Portable Luxury Down Pillow: $178' image={cardImg1} />
-              </div>
-              <div className='keen-slider__slide sm:p-2'>
-                <Card title='Sateen Sheet Set' description='Four Colors Starting at $625' image={cardImg2} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CardSliderSection cards={cards} />
       <HeroSection
         url={videoUrl}
         isVideo
@@ -123,6 +103,8 @@ const Home = () => {
         btnText='Read more about the collaboration'
         description={`We are proud to announce that DUXIANA has become Tottenham Hotspur Football Club's official bed supplier. Tottenham Hotspur has decided to put their trust in The DUX Bed as they believe that our products are more than just a bed, but more a sleep system and a vehicle for well-being.`}
       />
+      <CardBlockHeader title='Scandinavian Design and Environmental Impact' />
+      <HeroCardBlockSection cards={heroCards} />
     </>
   );
 };

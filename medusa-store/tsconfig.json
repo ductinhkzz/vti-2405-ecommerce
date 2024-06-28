@@ -17,14 +17,11 @@
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "checkJs": false
+    "checkJs": false,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src/"],
-  "exclude": [
-    "**/__tests__",
-    "**/__fixtures__",
-    "node_modules",
-    "build",
-    ".cache"
-  ]
+  "exclude": ["**/__tests__", "**/__fixtures__", "node_modules", "build", ".cache"]
 }
