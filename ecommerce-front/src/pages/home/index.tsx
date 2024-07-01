@@ -94,6 +94,7 @@ const Home = () => {
     <>
       <HeroBanerSection />
       <HeaderDivider />
+      <CardBlockHeader title='The DUXIANA Online Marketplace' btn={{ text: 'View all' }} />
       <CardSliderSection cards={cards} />
       <HeroSection
         url={videoUrl}
@@ -105,6 +106,8 @@ const Home = () => {
       />
       <CardBlockHeader title='Scandinavian Design and Environmental Impact' />
       <HeroCardBlockSection cards={heroCards} />
+      <CardBlockHeader title='THE DUX BED LINE-UP' btn={{ text: 'View all' }} />
+      <CardSliderSection cards={cards} />
     </>
   );
 };

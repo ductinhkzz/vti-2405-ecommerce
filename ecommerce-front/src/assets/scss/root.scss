@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import 'keen-slider/keen-slider.min.css';
+@import 'react-toastify/dist/ReactToastify.css';
 
 *::-webkit-scrollbar {
   @apply w-2;

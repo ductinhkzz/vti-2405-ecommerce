@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
+import { Link, NavLink } from 'react-router-dom';
 
 import { NAVIGATIONS } from '@/constants';
 import { LogoIcon } from '@/components';
+import { useRedux } from '@/hooks';
 
 const Header = () => {
+  const { appSelector } = useRedux();
+  const { customer } = appSelector((state) => state.auth);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className='absolute inset-x-0 top-0 z-50'>
-      <nav className='flex items-center justify-between p-6 lg:px-8' aria-label='Global'>
+      <nav className='flex items-center justify-between p-6 lg:px-8 shadow' aria-label='Global'>
         <div className='flex lg:flex-1'>
           <Link to='/' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Duxiana</span>
@@ -22,8 +25,7 @@ const Header = () => {
           <button
             type='button'
             className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
-            onClick={() => setMobileMenuOpen(true)}
-          >
+            onClick={() => setMobileMenuOpen(true)}>
             <span className='sr-only'>Open main menu</span>
             <Bars3Icon className='h-6 w-6' aria-hidden='true' />
           </button>
@@ -36,9 +38,15 @@ const Header = () => {
           ))}
         </div>
         <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-          <a href='#' className='text-sm font-semibold leading-6 text-gray-900'>
-            Log in <span aria-hidden='true'>&rarr;</span>
-          </a>
+          {customer === undefined ? (
+            <NavLink to='/login' className='text-sm font-semibold leading-6 text-gray-900'>
+              Log in <span aria-hidden='true'>&rarr;</span>
+            </NavLink>
+          ) : (
+            <NavLink to='/account' className='text-sm font-medium leading-6 text-gray-900 flex items-center gap-x-1'>
+              <UserIcon className='w-4 h-4' /> Account
+            </NavLink>
+          )}
         </div>
       </nav>
       <Dialog className='lg:hidden' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -52,8 +60,7 @@ const Header = () => {
             <button
               type='button'
               className='-m-2.5 rounded-md p-2.5 text-gray-700'
-              onClick={() => setMobileMenuOpen(false)}
-            >
+              onClick={() => setMobileMenuOpen(false)}>
               <span className='sr-only'>Close menu</span>
               <XMarkIcon className='h-6 w-6' aria-hidden='true' />
             </button>
@@ -65,8 +72,7 @@ const Header = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
-                  >
+                    className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'>
                     {item.name}
                   </a>
                 ))}
@@ -74,8 +80,7 @@ const Header = () => {
               <div className='py-6'>
                 <a
                   href='#'
-                  className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
-                >
+                  className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'>
                   Log in
                 </a>
               </div>

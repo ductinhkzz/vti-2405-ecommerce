@@ -1,6 +1,6 @@
 import { useKeenSlider } from 'keen-slider/react';
 import { MouseEvent, useMemo, useState } from 'react';
-import { ArrowRightCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 import type { ICard } from '@/types';
 import { useWindowSize } from '@/hooks';
@@ -56,37 +56,28 @@ const CardSliderSection = ({ cards }: CardBlockSectionProps) => {
     instanceRef.current?.next();
   };
   return (
-    <div className='flex justify-center my-16 md:my-24'>
-      <div className='flex flex-col justify-center items-center gap-2'>
-        <h2 className='text-extrabold text-lg tracking-widest'>The DUXIANA Online Marketplace</h2>
-        <p className='mb-2 w-full flex justify-center items-center'>
-          <Button color='secondary' variant='text' className='flex gap-x-1 items-center text-xs'>
-            View all
-            <ArrowRightCircleIcon className='h-4 w-4 color-gray-900' />
-          </Button>
-        </p>
-        <div className='container sm:w-xl w-screen block px-2'>
-          {loaded && instanceRef.current && (
-            <div className='justify-end gap-x-2 mb-2 px-2 hidden sm:flex'>
-              <Button color='secondary' className='p-2 rounded-full' onClick={onClickPre} disabled={currentSlide === 0}>
-                <ChevronLeftIcon className='h-5 w-5' />
-              </Button>
-              <Button
-                color='secondary'
-                className='p-2 rounded-full'
-                onClick={onClickNext}
-                disabled={currentSlide === instanceRef.current.track.details?.slides?.length - perView}>
-                <ChevronRightIcon className='h-5 w-5' />
-              </Button>
-            </div>
-          )}
-          <div ref={sliderRef} className='keen-slider'>
-            {cards.map((card) => (
-              <div key={card.id} className='keen-slider__slide sm:p-2'>
-                <Card {...card} />
-              </div>
-            ))}
+    <div className='flex justify-center mb-16 md:mb-24 -mt-8 md:-mt-12'>
+      <div className='container sm:w-xl w-screen block px-2'>
+        {loaded && instanceRef.current && (
+          <div className='justify-end gap-x-2 mb-2 px-2 hidden sm:flex'>
+            <Button color='secondary' className='p-2 rounded-full' onClick={onClickPre} disabled={currentSlide === 0}>
+              <ChevronLeftIcon className='h-5 w-5' />
+            </Button>
+            <Button
+              color='secondary'
+              className='p-2 rounded-full'
+              onClick={onClickNext}
+              disabled={currentSlide === instanceRef.current.track.details?.slides?.length - perView}>
+              <ChevronRightIcon className='h-5 w-5' />
+            </Button>
           </div>
+        )}
+        <div ref={sliderRef} className='keen-slider'>
+          {cards.map((card) => (
+            <div key={card.id} className='keen-slider__slide sm:p-2'>
+              <Card {...card} />
+            </div>
+          ))}
         </div>
       </div>
     </div>

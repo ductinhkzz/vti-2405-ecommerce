@@ -19,7 +19,7 @@ const HeroCard = ({ className, card }: HeroCardProps) => {
       <div
         className={twMerge(
           'col-start-1 col-end-2 z-10',
-          clsx(card.isTextTop ? 'row-start-1 row-end-2' : 'row-start-2 row-end-3 items-end'),
+          clsx(card.isTextTop ? 'row-start-1 row-end-2' : 'row-start-2 row-end-3 content-end'),
         )}>
         <div className='p-8'>
           <h3 className='text-white uppercase tracking-widest font-medium mb-2'>{card.title}</h3>
