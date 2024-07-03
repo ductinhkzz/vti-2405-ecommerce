@@ -12,3 +12,11 @@ export const BREAK_POINTS = {
   md: 768,
   sm: 640,
 };
+
+export const ACCOUNT_NAVIGATIONS = [
+  { name: 'Overview', href: '/account/overview' },
+  { name: 'Profile', href: '/account/profile' },
+  { name: 'Addresses', href: '/account/addresses' },
+  { name: 'Orders', href: '/account/orders' },
+  { name: 'Log out', href: '/account/logout' },
+];

@@ -43,7 +43,7 @@ const Header = () => {
               Log in <span aria-hidden='true'>&rarr;</span>
             </NavLink>
           ) : (
-            <NavLink to='/account' className='text-sm font-medium leading-6 text-gray-900 flex items-center gap-x-1'>
+            <NavLink to='/account/overview' className='text-sm font-medium leading-6 text-gray-900 flex items-center gap-x-1'>
               <UserIcon className='w-4 h-4' /> Account
             </NavLink>
           )}

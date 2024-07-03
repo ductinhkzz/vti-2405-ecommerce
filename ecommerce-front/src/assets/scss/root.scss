@@ -3,16 +3,5 @@
 @tailwind utilities;
 @import 'keen-slider/keen-slider.min.css';
 @import 'react-toastify/dist/ReactToastify.css';
+@import './common.scss';
 
-*::-webkit-scrollbar {
-  @apply w-2;
-}
-
-*::-webkit-scrollbar-track {
-  @apply rounded;
-  @apply border border-solid border-zinc-400;
-}
-
-*::-webkit-scrollbar-thumb {
-  @apply bg-zinc-400 rounded;
-}
