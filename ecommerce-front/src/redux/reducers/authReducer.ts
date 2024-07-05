@@ -22,9 +22,6 @@ export const authReducer = createSlice({
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
         state.customer = action.payload.customer;
       })
-      .addMatcher(authApi.endpoints.login.matchRejected, (state) => {
-        state.customer = undefined;
-      })
       .addMatcher(authApi.endpoints.getCustomer.matchFulfilled, (state, action) => {
         state.customer = action.payload.customer;
       })

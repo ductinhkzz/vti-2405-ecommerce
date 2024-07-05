@@ -1,7 +1,9 @@
 import { useCustomer } from '@/hooks';
+import { getProfileCompletion } from '../utils';
 
 const Overview = () => {
   const customer = useCustomer();
+  const completedPercent = getProfileCompletion(customer);
 
   return (
     <div className='flex-1'>
@@ -17,14 +19,14 @@ const Overview = () => {
             <div className='flex flex-col gap-y-4'>
               <h3 className='font-semibold text-lg'>Profile</h3>
               <div className='flex items-end gap-x-2'>
-                <span className='text-2xl font-semibold leading-none'>50%</span>
+                <span className='text-2xl font-semibold leading-none'>{completedPercent}%</span>
                 <span className='uppercase text-sm font-normal'>Completed</span>
               </div>
             </div>
             <div className='flex flex-col gap-y-4'>
               <h3 className='font-semibold text-lg'>Addresses</h3>
               <div className='flex items-end gap-x-2'>
-                <span className='text-2xl font-semibold leading-none'>0</span>
+                <span className='text-2xl font-semibold leading-none'>{customer?.shipping_addresses?.length ?? 0}</span>
                 <span className='uppercase text-sm font-normal'>Saved</span>
               </div>
             </div>

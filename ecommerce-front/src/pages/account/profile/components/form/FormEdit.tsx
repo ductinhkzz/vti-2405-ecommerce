@@ -1,7 +1,8 @@
-import { FormEventHandler, MouseEvent, ReactNode, useState } from 'react';
+import { FormEventHandler, MouseEvent, ReactNode } from 'react';
 
 import { Button } from '@/components';
 import { Transition, TransitionChild } from '@headlessui/react';
+import { useToggle } from '@/hooks';
 
 type FormEditProps = {
   title: string;
@@ -9,18 +10,24 @@ type FormEditProps = {
   description?: string;
   onSubmit?: FormEventHandler<HTMLFormElement>;
   children?: ReactNode;
+  disabled?: boolean;
 };
 
-const FormEdit = ({ title, content, description, onSubmit, children }: FormEditProps) => {
-  const [open, setOpen] = useState(false);
+const FormEdit = ({ title, content, description, onSubmit, children, disabled }: FormEditProps) => {
+  const [open, , onClose, toggle] = useToggle(false);
 
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setOpen((pre) => !pre);
+    toggle();
+  };
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    onSubmit?.(e);
+    onClose();
   };
 
   return (
-    <form className='w-full overflow-visible' onSubmit={onSubmit}>
+    <form className='w-full overflow-visible' onSubmit={handleSubmit}>
       <div className='text-sm'>
         <div className='flex items-end justify-between'>
           <div className='flex flex-col'>
@@ -45,7 +52,9 @@ const FormEdit = ({ title, content, description, onSubmit, children }: FormEditP
             <div className='transition-[max-height,opacity] duration-200 ease-in-out overflow-visible max-h-[1000px] opacity-100'>
               {children}
               <div className='flex justify-end'>
-                <Button type='submit' color='secondary' variant='contained' rounded>Save changes</Button>
+                <Button type='submit' color='secondary' variant='contained' rounded disabled={disabled}>
+                  Save changes
+                </Button>
               </div>
             </div>
           </TransitionChild>
