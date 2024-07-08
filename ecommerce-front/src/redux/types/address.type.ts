@@ -1,6 +1,6 @@
 import { IBase } from './common';
 
-export interface IBillingAddress extends IBase {
+export interface IAddress extends IBase {
   first_name: string;
   last_name: string;
   company?: string;
@@ -13,7 +13,3 @@ export interface IBillingAddress extends IBase {
   postal_code: string;
 }
 
-export interface IShippingAddress extends IBase {
-  first_name: string;
-  last_name: string;
-}

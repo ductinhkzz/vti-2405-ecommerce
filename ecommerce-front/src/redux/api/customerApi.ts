@@ -1,4 +1,4 @@
-import { ICustomer, UpdateCustomerRequest } from '../types';
+import { IAddress, ICustomer, UpdateCustomerRequest } from '../types';
 import { api } from './baseApi';
 
 export const customerApi = api.injectEndpoints({
@@ -10,6 +10,7 @@ export const customerApi = api.injectEndpoints({
           method: 'GET',
         };
       },
+      providesTags: [{ type: 'Customer', id: 'cusmomer-data' }],
     }),
     updateCustomer: builder.mutation<{ customer: ICustomer }, UpdateCustomerRequest>({
       query(arg) {
@@ -20,7 +21,42 @@ export const customerApi = api.injectEndpoints({
         };
       },
     }),
+    addShippingAddress: builder.mutation<{ customer: ICustomer }, { address: Partial<IAddress> }>({
+      query(arg) {
+        return {
+          url: 'store/customers/me/addresses',
+          method: 'POST',
+          body: { ...arg },
+        };
+      },
+      invalidatesTags: [{ type: 'Customer', id: 'cusmomer-data' }],
+    }),
+    updateShippingAddress: builder.mutation<{ customer: ICustomer }, Partial<IAddress>>({
+      query({ id, ...arg }) {
+        return {
+          url: `store/customers/me/addresses/${id}`,
+          method: 'POST',
+          body: { ...arg },
+        };
+      },
+      invalidatesTags: [{ type: 'Customer', id: 'cusmomer-data' }],
+    }),
+    deleteAddress: builder.mutation<void, { id: string }>({
+      query({ id }) {
+        return {
+          url: `store/customers/me/addresses/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: [{ type: 'Customer', id: 'cusmomer-data' }],
+    }),
   }),
 });
 
-export const { useGetCustomerQuery, useUpdateCustomerMutation } = customerApi;
+export const {
+  useGetCustomerQuery,
+  useUpdateCustomerMutation,
+  useAddShippingAddressMutation,
+  useDeleteAddressMutation,
+  useUpdateShippingAddressMutation,
+} = customerApi;

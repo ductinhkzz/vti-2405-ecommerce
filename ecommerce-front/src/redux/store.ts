@@ -1,14 +1,13 @@
 import { ConfigureStoreOptions, configureStore } from '@reduxjs/toolkit';
 
 import { api } from './api';
-import counterReducer from './reducers/counterReducer';
-import authReducer from './reducers/authReducer';
+import { authReducer, globalReducer } from './reducers';
 
 export const createStore = (options?: ConfigureStoreOptions['preloadedState'] | undefined) =>
   configureStore({
     reducer: {
-      counter: counterReducer,
       auth: authReducer,
+      global: globalReducer,
       [api.reducerPath]: api.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),

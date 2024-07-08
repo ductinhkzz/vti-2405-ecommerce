@@ -7,7 +7,7 @@ type ButtonColor = 'primary' | 'secondary';
 
 type ButtonSize = 'sm' | 'md';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   color?: ButtonColor;
   size?: ButtonSize;

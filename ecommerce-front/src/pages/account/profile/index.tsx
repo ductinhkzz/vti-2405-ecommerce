@@ -4,19 +4,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash-es';
 
 import { useCustomer, useRedux, useToast } from '@/hooks';
-import { FormEdit } from './components';
 import { Input, Select } from '@/components';
 import { accountSchema } from '@/helpers';
 import { useLoginMutation, useUpdateCustomerMutation, useGetRegionQuery } from '@/redux/api';
-import { setCustomer } from '@/redux/reducers/authReducer';
-import { IBillingAddress } from '@/redux/types';
+import { setCustomer } from '@/redux/reducers';
+import { IAddress } from '@/redux/types';
+import { FormEdit } from './components';
 import { PageHeader } from '../components';
 
 const Profile = () => {
   const toast = useToast();
   const customer = useCustomer();
-  const { dispatch } = useRedux();
-  const { data: regions = [] } = useGetRegionQuery();
+  const { dispatch, appSelector } = useRedux();
+  const { countryOptions } = appSelector((state) => state.global);
+
+  useGetRegionQuery(undefined, {
+    skip: countryOptions.length !== 0,
+  });
+
   const [updateCustomer, { isSuccess }] = useUpdateCustomerMutation();
   const [auth] = useLoginMutation();
   const {
@@ -37,15 +42,11 @@ const Profile = () => {
         'updated_at',
         'deleted_at',
         'customer_id',
-      ]) as Omit<IBillingAddress, 'id' | 'created_at' | 'updated_at' | 'deleted_at'>,
+      ]) as Omit<IAddress, 'id' | 'created_at' | 'updated_at' | 'deleted_at'>,
     },
     resolver: yupResolver(accountSchema),
   });
 
-  const countryOption = regions
-    .map((region) => region.countries)
-    .flat()
-    .map((country) => ({ label: country.display_name, value: country.iso_2 }));
   const onSubmit = handleSubmit((data) => {
     if (data.password && data.old_password && customer.email) {
       auth({ password: data.old_password, email: customer.email }).then((res) => {
@@ -137,7 +138,7 @@ const Profile = () => {
               <Input label='City' type='text' {...register('billing_address.city')} />
             </div>
             <div>
-              <Select label='Country' {...register('billing_address.country_code')} options={countryOption} />
+              <Select label='Country' {...register('billing_address.country_code')} options={countryOptions} />
             </div>
           </div>
         </FormEdit>

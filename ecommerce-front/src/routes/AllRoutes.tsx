@@ -26,7 +26,7 @@ const AllRoutes = () => {
           <Route element={<AccountLayout />}>
             <Route path='account/overview' element={<LoadComponent component={Overview} />} />
             <Route path='account/profile' element={<LoadComponent component={Profile} />} />
-            <Route path='account/addresses' element={<LoadComponent component={Addresses} />} />
+            <Route path='account/addresses/:type?/:id?' element={<LoadComponent component={Addresses} />} />
             <Route path='account/orders' element={<LoadComponent component={Orders} />} />
             <Route path='account/logout' element={<LoadComponent component={Logout} />} />
           </Route>

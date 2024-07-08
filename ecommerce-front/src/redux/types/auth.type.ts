@@ -1,4 +1,4 @@
-import { IBillingAddress, IShippingAddress } from './address.type';
+import { IAddress } from './address.type';
 import { IBase } from './common';
 
 export interface ICustomer extends IBase {
@@ -9,8 +9,8 @@ export interface ICustomer extends IBase {
   phone: string;
   has_account: boolean;
   metadata?: Record<string, string>;
-  billing_address?: IBillingAddress;
-  shipping_addresses?: IShippingAddress[];
+  billing_address?: IAddress;
+  shipping_addresses?: IAddress[];
 }
 
 export type LoginRequestType = {
@@ -24,5 +24,5 @@ export type UpdateCustomerRequest = {
   email?: string;
   phone?: string;
   password?: string;
-  billing_address?: Omit<IBillingAddress, 'id' | 'created_at' | 'updated_at' | 'deleted_at'>;
+  billing_address?: Omit<IAddress, 'id' | 'created_at' | 'updated_at' | 'deleted_at'>;
 };

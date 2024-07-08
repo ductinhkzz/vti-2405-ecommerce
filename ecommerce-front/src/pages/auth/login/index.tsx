@@ -6,12 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input } from '@/components';
 import { LoginSchemaType, loginSchema } from '@/helpers';
 import { useLoginMutation } from '@/redux/api';
-import { useToast } from '@/hooks';
+import { useCustomer, useToast } from '@/hooks';
 
 const Login = () => {
   const navigate = useNavigate();
   const toast = useToast();
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const customer = useCustomer();
+  const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
   const {
     register,
     handleSubmit,
@@ -30,6 +31,18 @@ const Login = () => {
       navigate('/');
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast('Email or password is incorrect !', 'error');
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (customer) {
+      navigate('/');
+    }
+  }, [customer]);
 
   return (
     <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8'>

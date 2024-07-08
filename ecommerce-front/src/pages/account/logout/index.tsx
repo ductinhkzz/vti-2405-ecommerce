@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import { useCustomerLogoutMutation } from '@/redux/api';
 import { useRedux, useToast } from '@/hooks';
-import { setCustomer } from '@/redux/reducers/authReducer';
+import { setCustomer } from '@/redux/reducers';
 
 const Logout = () => {
   const [logout, { isLoading, isError, isSuccess }] = useCustomerLogoutMutation();

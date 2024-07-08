@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ICustomer } from '../types';
-import { authApi } from '../api';
+import { customerApi } from '../api';
 
 export type AuthStateType = {
   customer?: ICustomer;
@@ -9,7 +9,7 @@ export type AuthStateType = {
 
 const initialState: AuthStateType = {};
 
-export const authReducer = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -19,18 +19,15 @@ export const authReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+      .addMatcher(customerApi.endpoints.getCustomer.matchFulfilled, (state, action) => {
         state.customer = action.payload.customer;
       })
-      .addMatcher(authApi.endpoints.getCustomer.matchFulfilled, (state, action) => {
-        state.customer = action.payload.customer;
-      })
-      .addMatcher(authApi.endpoints.getCustomer.matchRejected, (state) => {
+      .addMatcher(customerApi.endpoints.getCustomer.matchRejected, (state) => {
         state.customer = undefined;
       });
   },
 });
 
-export const { setCustomer } = authReducer.actions;
+export const { setCustomer } = authSlice.actions;
 
-export default authReducer.reducer;
+export const authReducer = authSlice.reducer;

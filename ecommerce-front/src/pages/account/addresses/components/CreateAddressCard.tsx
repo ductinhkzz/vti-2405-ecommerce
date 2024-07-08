@@ -2,10 +2,14 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 
 import CardContainer from './CardContainer';
 
-const CreateAddressCard = () => {
+type CreateAddressCardProps = {
+  onOpen: () => void;
+};
+
+const CreateAddressCard = ({ onOpen }: CreateAddressCardProps) => {
   return (
     <CardContainer>
-      <div className='h-full flex flex-col justify-between cursor-pointer'>
+      <div role='none' className='h-full flex flex-col justify-between cursor-pointer' onClick={onOpen}>
         <h1 className='font-medium'>New address</h1>
         <div>
           <PlusIcon className='w-5 h-5' />

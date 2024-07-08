@@ -10,7 +10,7 @@ interface InputProps extends FormInputProps {
   error?: string;
 }
 
-const Input = forwardRef(({ label, className, error, ...props }: InputProps, ref: Ref<HTMLInputElement>) => {
+const Input = forwardRef(({ label, className, error, required, ...props }: InputProps, ref: Ref<HTMLInputElement>) => {
   const [open, , , toggle] = useToggle(false);
   const isPasswordType = props.type === 'password';
 
@@ -23,9 +23,20 @@ const Input = forwardRef(({ label, className, error, ...props }: InputProps, ref
 
   return (
     <div className={className}>
-      {!!label && <FormLabel htmlFor={props.id}>{label}</FormLabel>}
+      {!!label && (
+        <FormLabel htmlFor={props.id}>
+          {label}
+          &nbsp;{required && <span className='text-red-500'>*</span>}
+        </FormLabel>
+      )}
       <div className='relative'>
-        <FormInput ref={ref} {...props} type={isPasswordType ? _type : props.type} className='pr-6' />
+        <FormInput
+          ref={ref}
+          {...props}
+          required={required}
+          type={isPasswordType ? _type : props.type}
+          className='pr-6'
+        />
         {isPasswordType && (
           <button className='absolute right-2 top-[50%] -translate-y-1/2 cursor-pointer' onClick={onClick}>
             {!open ? <EyeSlashIcon className='h-4 w-4' /> : <EyeIcon className='h-4 w-4' />}
