@@ -14,6 +14,7 @@ import cardImg3 from '@/assets/images/card-3.jpg';
 import cardImg4 from '@/assets/images/card-4.jpg';
 import heroCardImg1 from '@/assets/images/hero-card-1.jpg';
 import heroCardImg2 from '@/assets/images/hero-card-2.jpg';
+import { usePageTitle } from '@/hooks';
 
 const Home = () => {
   const cards: ICard[] = [
@@ -90,15 +91,37 @@ const Home = () => {
     },
   ];
 
+  usePageTitle('Duxiana Store');
+
   return (
     <>
       <HeroBanerSection />
-      <HeaderDivider />
+      <HeaderDivider
+        header={{
+          title: 'Next-Level Comfort',
+        }}
+        content={{
+          text: 'Enjoying the comfort of your bed is the ultimate luxury. Our goal is to provide you with the best possible  experience of rest. We achieve this through innovation. DUX technology enables the highest quality sleep, supporting your well-being, and ensuring back pains relief.',
+          actions: [
+            {
+              text: 'Discover the DUX advantages',
+            },
+            {
+              text: 'Try it yourself →',
+            },
+          ],
+        }}
+      />
       <CardBlockHeader title='The DUXIANA Online Marketplace' btn={{ text: 'View all' }} />
       <CardSliderSection cards={cards} />
       <HeroSection
-        url={videoUrl}
-        isVideo
+        mediaList={[
+          {
+            url: videoUrl,
+            isVideo: true,
+            postion: 'full',
+          },
+        ]}
         subTitle='New partner'
         title='Tottenham Hotspur'
         btnText='Read more about the collaboration'

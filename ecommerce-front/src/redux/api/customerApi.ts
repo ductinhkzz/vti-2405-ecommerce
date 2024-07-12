@@ -55,6 +55,7 @@ export const customerApi = api.injectEndpoints({
 
 export const {
   useGetCustomerQuery,
+  useLazyGetCustomerQuery,
   useUpdateCustomerMutation,
   useAddShippingAddressMutation,
   useDeleteAddressMutation,

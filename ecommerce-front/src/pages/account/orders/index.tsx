@@ -1,8 +1,8 @@
-import React from 'react';
+import { usePageTitle } from '@/hooks';
 
 const Orders = () => {
 
-  
+  usePageTitle('Orders | Duxiana')
   return <div>Orders</div>;
 };
 

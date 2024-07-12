@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash-es';
 
-import { useCustomer, useRedux, useToast } from '@/hooks';
+import { useCustomer, usePageTitle, useRedux, useToast } from '@/hooks';
 import { Input, Select } from '@/components';
 import { accountSchema } from '@/helpers';
 import { useLoginMutation, useUpdateCustomerMutation, useGetRegionQuery } from '@/redux/api';
@@ -72,6 +72,9 @@ const Profile = () => {
       dispatch(setCustomer(res.data?.customer));
     });
   });
+
+  usePageTitle('Profile | Duxiana');
+
   useEffect(() => {
     if (isSuccess) {
       toast('Update succesfully !', 'success');

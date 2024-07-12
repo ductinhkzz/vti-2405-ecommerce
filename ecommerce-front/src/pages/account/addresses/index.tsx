@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 
-import { useCRUD, useCustomer, useRedux, useToast } from '@/hooks';
+import { useCRUD, useCustomer, usePageTitle, useRedux, useToast } from '@/hooks';
 import { addressSchema, AddressSchemaType } from '@/helpers';
 import {
   useAddShippingAddressMutation,
@@ -74,6 +74,8 @@ const Addresses = () => {
   const handleDeleteAddress = () => {
     !!id && deleteAddress({ id });
   };
+
+  usePageTitle('Addresses | Duxiana');
 
   useEffect(() => {
     if (isSuccess) {

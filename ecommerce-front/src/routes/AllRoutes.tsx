@@ -4,10 +4,13 @@ import React from 'react';
 import { AccountLayout, MainLayout } from '@/layouts';
 import LoadComponent from './LoadComponent';
 import WithLogin from './WithLogin';
+import RequiredLogin from './RequiredLogin';
 
 const Home = React.lazy(() => import('@/pages/home'));
 const Login = React.lazy(() => import('@/pages/auth/login'));
 const Product = React.lazy(() => import('@/pages/product'));
+const ContactUs = React.lazy(() => import('@/pages/contact-us'));
+const AboutUs = React.lazy(() => import('@/pages/about-us'));
 //Account
 const Overview = React.lazy(() => import('@/pages/account/overview'));
 const Profile = React.lazy(() => import('@/pages/account/profile'));
@@ -19,11 +22,13 @@ const AllRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<WithLogin Component={MainLayout} />}>
+        <Route element={<WithLogin Component={MainLayout} />}>
           <Route path='/' element={<LoadComponent component={Home} />} />
           <Route path='/login' element={<LoadComponent component={Login} />} />
           <Route path='/product' element={<LoadComponent component={Product} />} />
-          <Route element={<AccountLayout />}>
+          <Route path='/contact-us' element={<LoadComponent component={ContactUs} />} />
+          <Route path='/about-us' element={<LoadComponent component={AboutUs} />} />
+          <Route element={<RequiredLogin Component={AccountLayout} />}>
             <Route path='account/overview' element={<LoadComponent component={Overview} />} />
             <Route path='account/profile' element={<LoadComponent component={Profile} />} />
             <Route path='account/addresses/:type?/:id?' element={<LoadComponent component={Addresses} />} />

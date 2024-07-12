@@ -1,21 +1,31 @@
 import { ICard } from '@/types';
-import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import { Container } from '@/components';
 import { HeroCard } from './HeroCard';
 
 type HeroCardBlockSectionProps = {
   cards: ICard[];
+  full?: boolean;
 };
 
-const HeroCardBlockSection = ({ cards }: HeroCardBlockSectionProps) => {
+const HeroCardBlockSection = ({ cards, full = true }: HeroCardBlockSectionProps) => {
   const totalCard = cards.length;
 
   return (
-    <div className={twMerge('w-full grid grid-rows-1 mb-16', clsx(totalCard === 1 ? 'grid-cols-1' : 'grid-cols-2'))}>
-      {cards.map((card) => (
-        <HeroCard key={card.id} card={card} />
-      ))}
-    </div>
+    <Container className='mt-8 md:mt-12'>
+      <div
+        className={twMerge(
+          'w-full grid grid-rows-1',
+          `grid-cols-${totalCard}`,
+          !full && 'container sm:w-xl w-full px-24',
+          totalCard > 2 && 'gap-4',
+        )}>
+        {cards.map((card, index) => (
+          <HeroCard key={card.id} card={card} className={`col-start-${index + 1} col-end-${index + 2}`} />
+        ))}
+      </div>
+    </Container>
   );
 };
 

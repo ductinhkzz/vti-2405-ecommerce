@@ -5,14 +5,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, Input } from '@/components';
 import { LoginSchemaType, loginSchema } from '@/helpers';
-import { useLoginMutation } from '@/redux/api';
-import { useCustomer, useToast } from '@/hooks';
+import { useLazyGetCustomerQuery, useLoginMutation } from '@/redux/api';
+import { useCustomer, usePageTitle, useToast } from '@/hooks';
 
 const Login = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const customer = useCustomer();
   const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
+  const [getMe] = useLazyGetCustomerQuery();
   const {
     register,
     handleSubmit,
@@ -25,10 +26,12 @@ const Login = () => {
     login(data);
   });
 
+  usePageTitle('Login | Duxiana');
+
   useEffect(() => {
     if (isSuccess) {
       toast('Login successfully !', 'success');
-      navigate('/');
+      getMe()
     }
   }, [isSuccess]);
 
@@ -39,10 +42,10 @@ const Login = () => {
   }, [isError]);
 
   useEffect(() => {
-    if (customer) {
+    if (customer?.id) {
       navigate('/');
     }
-  }, [customer]);
+  }, [customer?.id]);
 
   return (
     <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8'>

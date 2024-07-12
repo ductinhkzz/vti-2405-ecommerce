@@ -1,5 +1,5 @@
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
-import { Button } from '@/components';
+import { Button, Container } from '@/components';
 
 type CardBlockHeaderProps = {
   title: string;
@@ -11,7 +11,7 @@ type CardBlockHeaderProps = {
 
 const CardBlockHeader = ({ title, btn }: CardBlockHeaderProps) => {
   return (
-    <div className='flex justify-center mt-16 mb-8 md:mt-24 md:mb-12'>
+    <Container className='mt-16 mb-8 md:mt-24 md:mb-12'>
       <div className=''>
         <h2 className='text-center text-xl font-medium tracking-wider'>{title}</h2>
         {btn && (
@@ -23,7 +23,7 @@ const CardBlockHeader = ({ title, btn }: CardBlockHeaderProps) => {
           </p>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

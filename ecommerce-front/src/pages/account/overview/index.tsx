@@ -1,9 +1,11 @@
-import { useCustomer } from '@/hooks';
+import { useCustomer, usePageTitle } from '@/hooks';
 import { getProfileCompletion } from '../utils';
 
 const Overview = () => {
   const customer = useCustomer();
   const completedPercent = getProfileCompletion(customer);
+
+  usePageTitle('Account | Duxiana')
 
   return (
     <div className='flex-1'>
