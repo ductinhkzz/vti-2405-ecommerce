@@ -97,34 +97,39 @@ const Home = () => {
     <>
       <HeroBanerSection />
       <HeaderDivider
-        header={{
-          title: 'Next-Level Comfort',
-        }}
-        content={{
-          text: 'Enjoying the comfort of your bed is the ultimate luxury. Our goal is to provide you with the best possible  experience of rest. We achieve this through innovation. DUX technology enables the highest quality sleep, supporting your well-being, and ensuring back pains relief.',
-          actions: [
-            {
-              text: 'Discover the DUX advantages',
-            },
-            {
-              text: 'Try it yourself →',
-            },
-          ],
-        }}
+        title='Next-Level Comfort'
+        description='Enjoying the comfort of your bed is the ultimate luxury. Our goal is to provide you with the best possible  experience of rest. We achieve this through innovation. DUX technology enables the highest quality sleep, supporting your well-being, and ensuring back pains relief.'
+        actions={[
+          {
+            text: 'Discover the DUX advantages',
+            url: '',
+          },
+          {
+            text: 'Try it yourself →',
+            url: '',
+            variant: 'text',
+          },
+        ]}
       />
       <CardBlockHeader title='The DUXIANA Online Marketplace' btn={{ text: 'View all' }} />
       <CardSliderSection cards={cards} />
       <HeroSection
-        mediaList={[
+        medias={[
           {
             url: videoUrl,
             isVideo: true,
-            postion: 'full',
+            position: 'full',
           },
         ]}
-        subTitle='New partner'
+        sub_title='New partner'
         title='Tottenham Hotspur'
-        btnText='Read more about the collaboration'
+        theme='black'
+        actions={[
+          {
+            text: 'Read more about the collaboration',
+            url: '',
+          },
+        ]}
         description={`We are proud to announce that DUXIANA has become Tottenham Hotspur Football Club's official bed supplier. Tottenham Hotspur has decided to put their trust in The DUX Bed as they believe that our products are more than just a bed, but more a sleep system and a vehicle for well-being.`}
       />
       <CardBlockHeader title='Scandinavian Design and Environmental Impact' />

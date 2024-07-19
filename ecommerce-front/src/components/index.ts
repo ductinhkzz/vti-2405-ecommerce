@@ -8,3 +8,4 @@ export * from './ButtonLoading';
 export * from './IconButton';
 export * from './Slider';
 export * from './Container';
+export * from './RenderBlock';

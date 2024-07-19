@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { ArrowRightCircleIcon } from '@heroicons/react/24/outline'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 
 import { Button } from '../Button';
 
@@ -27,7 +27,11 @@ const CardListBlock = ({ img, title, subTitle, description, action }: CardListBl
             <h3 className='uppercase text-sm font-medium tracking-widest mb-2'>{title}</h3>
             <p className='text-xs font-extralight tracking-wider mb-8'>{description}</p>
             <p>
-              <Button color='secondary' variant='text' className='pl-0 hover:pl-3 font-medium flex items-center gap-x-1' size='sm'>
+              <Button
+                color='secondary'
+                variant='text'
+                className='pl-0 hover:pl-3 font-medium flex items-center gap-x-1'
+                size='sm'>
                 {action.text}
                 <ArrowRightCircleIcon className='w-4 h-4' />
               </Button>

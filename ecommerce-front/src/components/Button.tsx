@@ -1,7 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type ButtonVariant = 'outlined' | 'text' | 'contained';
+export type ButtonVariant = 'outlined' | 'text' | 'contained';
 
 type ButtonColor = 'primary' | 'secondary';
 

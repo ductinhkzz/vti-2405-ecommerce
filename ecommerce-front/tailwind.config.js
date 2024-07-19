@@ -5,8 +5,12 @@ export default {
     extend: {
       backgroundImage: {
         'hero-pattern-1': "url('./src/assets/images/hero-img-1.webp')",
-      }
-    }
+      },
+      colors: {
+        'primary-yellow': '#a48661',
+        'divider-color': '#4f4e4e',
+      },
+    },
   },
   plugins: [],
 };

@@ -10,13 +10,9 @@ const ContactUs = () => {
   return (
     <>
       <HeaderDivider
-        header={{
-          title: 'CONTACT US',
-          subTitle: 'How can we help?',
-        }}
-        content={{
-          text: `At DUX, we believe that the art of listening is the basis of good communication. That is why we're always ready to hear your questions, ideas, or suggestions. Please fill out the contact form, and we will get back to you as quickly as possible.`,
-        }}
+        title='CONTACT US'
+        sub_title='How can we help?'
+        description={`At DUX, we believe that the art of listening is the basis of good communication. That is why we're always ready to hear your questions, ideas, or suggestions. Please fill out the contact form, and we will get back to you as quickly as possible.`}
       />
       <ContactForm />
       <ContactSlider />
@@ -31,17 +27,22 @@ const ContactUs = () => {
         }}
       />
       <HeroSection
-        mediaList={[
+        medias={[
           {
             url: heroImgUrl,
             isVideo: false,
-            postion: 'right',
+            position: 'right',
           },
         ]}
         theme='gray'
-        subTitle='Our stores'
+        sub_title='Our stores'
         title='Find a DUX bed close to you'
-        btnText='Find your nearest store'
+        actions={[
+          {
+            text: 'Find your nearest store',
+            url: '',
+          },
+        ]}
         description='To get the specific local information, search for the nearest store. Visit, call, or write to us - we will be more than happy to assist you.'
       />
     </>

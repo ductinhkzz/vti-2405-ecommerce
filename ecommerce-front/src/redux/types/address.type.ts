@@ -12,4 +12,3 @@ export interface IAddress extends IBase {
   province?: string;
   postal_code: string;
 }
-

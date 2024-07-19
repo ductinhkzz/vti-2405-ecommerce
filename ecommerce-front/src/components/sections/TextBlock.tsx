@@ -1,20 +1,26 @@
 import { twMerge } from 'tailwind-merge';
-import { Container } from '../Container';
-import { Button } from '../Button';
 
-type TextBlockProps = {
-  subTitle?: string;
+import { Container } from '../Container';
+import { ButtonVariant } from '../Button';
+import BlockActions from './BlockActions';
+
+export type TextBlockProps = {
+  sub_title?: string;
   title: string;
   description?: string;
   highlightText?: string;
   position?: 'left' | 'center';
-  action?: {
-    text: 'Explore our furniture collection';
-    url?: string;
-  };
+  actions?: Array<{ url: string; text: string; variant?: ButtonVariant }>;
 };
 
-const TextBlock = ({ title, subTitle, description, highlightText, position = 'center', action }: TextBlockProps) => {
+const TextBlock = ({
+  title,
+  sub_title,
+  description,
+  highlightText,
+  position = 'center',
+  actions = [],
+}: TextBlockProps) => {
   return (
     <Container>
       <div
@@ -28,17 +34,13 @@ const TextBlock = ({ title, subTitle, description, highlightText, position = 'ce
             'flex flex-col justify-center items-center max-w-lg px-8',
             position === 'left' && 'col-start-2 col-end-8 items-start',
           )}>
-          <p className='uppercase text-xs mb-2 tracking-widest'>{subTitle}</p>
+          {sub_title && <p className='uppercase text-xs mb-2 tracking-widest'>{sub_title}</p>}
           <h1 className='font-medium text-2xl mb-4'>{title}</h1>
           <p className={twMerge('text-sm font-light mb-1', position === 'center' && 'text-center')}>{description}</p>
           <p className={twMerge('text-sm font-light text-gray-500', position === 'center' && 'text-center')}>
             {highlightText}
           </p>
-          {action && (
-            <p className='mt-8'>
-              <Button color='secondary' size='sm'>{action.text}</Button>
-            </p>
-          )}
+          <BlockActions actions={actions} />
         </div>
       </div>
     </Container>
