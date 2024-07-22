@@ -1,13 +1,14 @@
 import { objectToParams } from '@/utils';
-import { GetProductsRequest, GetProductsResponse, IProductCategory, IProductCollection } from '../types';
+import { GetProductsRequest, GetProductsResponse, IProduct, IProductCategory, IProductCollection } from '../types';
 import { api } from './baseApi';
 
 export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getProductCollections: builder.query<IProductCollection[], void>({
-      query() {
+    getProductCollections: builder.query<IProductCollection[], { handle?: string[] }>({
+      query(args) {
+        const params = objectToParams({ ...args });
         return {
-          url: 'store/collections',
+          url: 'store/collections?' + params,
           method: 'GET',
         };
       },
@@ -47,6 +48,17 @@ export const productApi = api.injectEndpoints({
         };
       },
     }),
+    getProduct: builder.query<IProduct, { id: string }>({
+      query({ id }) {
+        return {
+          url: `store/products/${id}`,
+          method: 'GET',
+        };
+      },
+      transformResponse: (response: { product: IProduct }) => {
+        return response.product;
+      },
+    }),
   }),
 });
 
@@ -55,4 +67,5 @@ export const {
   useGetProductCategoriesQuery,
   useGetProductCollectionQuery,
   useGetProductsQuery,
+  useGetProductQuery,
 } = productApi;

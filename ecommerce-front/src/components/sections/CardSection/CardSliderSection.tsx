@@ -2,15 +2,17 @@ import type { ICard } from '@/types';
 import { Card } from './Card';
 import { Slider } from '../../Slider';
 
-type CardBlockSectionProps = {
+export type CardSliderSectionProps = {
   cards: ICard[];
+  perView?: number;
+  hideAction?: boolean;
 };
 
-const CardSliderSection = ({ cards }: CardBlockSectionProps) => {
+const CardSliderSection = ({ cards, ...rest }: CardSliderSectionProps) => {
   return (
-    <Slider>
-      {cards.map((card) => (
-        <div key={card.id} className='keen-slider__slide sm:p-2'>
+    <Slider {...rest}>
+      {cards.map((card, i) => (
+        <div key={`${card.title}-${i}`} className='keen-slider__slide sm:p-2'>
           <Card {...card} />
         </div>
       ))}

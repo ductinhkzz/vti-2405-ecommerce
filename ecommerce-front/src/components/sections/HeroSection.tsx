@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { ButtonVariant } from '../Button';
 import { Container } from '../Container';
-import BlockActions from './BlockActions';
+import { BlockActions } from './BlockActions';
+import { ActionType } from '@/types';
 interface HeroSectionProps {
   description?: string;
   title?: string;
@@ -14,7 +14,7 @@ interface HeroSectionProps {
     position?: 'left' | 'right' | 'full';
   }>;
   theme?: 'gray' | 'warm-gray' | 'white' | 'black';
-  actions?: Array<{ url: string; text: string; variant?: ButtonVariant }>;
+  actions?: ActionType[];
 }
 
 const HeroSection = ({
@@ -37,7 +37,7 @@ const HeroSection = ({
             'grid-cols-2': medias.length === 2 || mediaHasLeftOrRight,
             'grid-cols-1': mediaHasFull,
           },
-          `hero__theme-${theme}`,
+          `theme-${theme}`,
         )}>
         {medias.map(({ url, position = 'full', isVideo = false }) => (
           <div
@@ -52,7 +52,7 @@ const HeroSection = ({
               'hero__image',
             )}>
             {isVideo && <video src={url} autoPlay muted loop className='w-full h-full' />}
-            {!isVideo && <img src={url} alt='' className='w-full h-full max-h-[70vh]' />}
+            {!isVideo && <img src={url} alt='' className='w-full h-full max-h-[70vh] object-cover' />}
           </div>
         ))}
         <div

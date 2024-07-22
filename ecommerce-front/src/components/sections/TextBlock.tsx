@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Container } from '../Container';
 import { ButtonVariant } from '../Button';
-import BlockActions from './BlockActions';
+import { BlockActions } from './BlockActions';
 
 export type TextBlockProps = {
   sub_title?: string;

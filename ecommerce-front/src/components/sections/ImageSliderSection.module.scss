@@ -1,0 +1,6 @@
+.progress {
+  --slider-progress: 0%;
+  background: linear-gradient(90deg, #c2a066 0, #c2a066 var(--slider-progress), #000 var(--slider-progress), #000 100%);
+  transition: opacity .1s ease-out;
+  @apply w-24 h-0.5;
+}

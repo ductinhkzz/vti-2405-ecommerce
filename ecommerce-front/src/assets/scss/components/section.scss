@@ -1,0 +1,23 @@
+.theme {
+  &-warm-gray {
+    background-color: #f5f2f0;
+    @apply text-gray-900;
+  }
+
+  &-black {
+    @apply text-white;
+
+    & .hero__image::before {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0, rgba(0, 0, 0, 0.35) 30%, transparent 55%);
+      bottom: 0;
+      content: '';
+      display: block;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+    }
+  }
+}

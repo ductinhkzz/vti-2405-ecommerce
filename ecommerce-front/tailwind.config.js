@@ -10,6 +10,9 @@ export default {
         'primary-yellow': '#a48661',
         'divider-color': '#4f4e4e',
       },
+      fontSize: {
+        xs: '0.625rem',
+      },
     },
   },
   plugins: [],

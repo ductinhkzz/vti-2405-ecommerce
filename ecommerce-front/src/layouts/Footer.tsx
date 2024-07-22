@@ -4,7 +4,7 @@ import { parseMetadata } from '@/utils';
 import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
-  const { data = [] } = useGetProductCollectionsQuery();
+  const { data = [] } = useGetProductCollectionsQuery({});
   const { data: productCategories = [] } = useGetProductCategoriesQuery();
   const collections = data
     .map((collection) => {
@@ -42,7 +42,7 @@ const Footer = () => {
           {collections.map((collection) => (
             <li key={collection.id} className='basis-1/4 max-w-1/4 p-4'>
               <NavLink
-                to={`collection/${collection.id}`}
+                to={`/collection/${collection.handle}`}
                 className='text-md font-semibold text-primary-yellow tracking-widest'>
                 {collection.title}
               </NavLink>
@@ -51,7 +51,7 @@ const Footer = () => {
                 {collection.categories.map((category) => (
                   <li key={category.id} className='mb-2'>
                     <NavLink
-                      to={`${collection.handle}/${category.handle}`}
+                      to={`/${collection.handle}/${category.handle}`}
                       className='text-xs uppercase tracking-widest'>
                       {category.name}
                     </NavLink>
@@ -61,41 +61,41 @@ const Footer = () => {
             </li>
           ))}
           <li className='basis-1/4 max-w-1/4 p-4'>
-            <NavLink to='why-dux' className='text-md font-semibold text-primary-yellow tracking-widest'>
+            <NavLink to='/why-dux' className='text-md font-semibold text-primary-yellow tracking-widest'>
               Why DUX
             </NavLink>
             <div className='w-full h-[0.5px] bg-divider-color my-4' />
             <ol>
               <li className='mb-2'>
-                <NavLink to='why-dux/innovation' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/why-dux/innovation' className='text-xs uppercase tracking-widest'>
                   Innovation
                 </NavLink>
               </li>
               <li className='mb-2'>
-                <NavLink to='why-dux/innovation' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/why-dux/innovation' className='text-xs uppercase tracking-widest'>
                   Sleep science
                 </NavLink>
               </li>
             </ol>
           </li>
           <li className='basis-1/4 max-w-1/4 p-4'>
-            <NavLink to='about-us' className='text-md font-semibold text-primary-yellow tracking-widest'>
+            <NavLink to='/about-us' className='text-md font-semibold text-primary-yellow tracking-widest'>
               About us
             </NavLink>
             <div className='w-full h-[0.5px] bg-divider-color my-4' />
             <ol>
               <li className='mb-2'>
-                <NavLink to='about-us/contact-us' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/about-us/contact-us' className='text-xs uppercase tracking-widest'>
                   Contact us
                 </NavLink>
               </li>
               <li className='mb-2'>
-                <NavLink to='about-us/terms-of-use' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/about-us/terms-of-use' className='text-xs uppercase tracking-widest'>
                   Terms of Use
                 </NavLink>
               </li>
               <li className='mb-2'>
-                <NavLink to='about-us/privacy-policy' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/about-us/privacy-policy' className='text-xs uppercase tracking-widest'>
                   Privacy Policy
                 </NavLink>
               </li>

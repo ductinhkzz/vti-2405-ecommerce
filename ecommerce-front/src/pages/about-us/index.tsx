@@ -15,19 +15,16 @@ import heroCard3 from '@/assets/images/about-us/hero-card-3.jpg';
 const AboutUs = () => {
   const heroCards: ICard[] = [
     {
-      id: '1',
       title: 'News and Events',
       description: 'Follow our news',
       image: heroCard1,
     },
     {
-      id: '2',
       title: 'Contact us',
       description: 'Find your local contact',
       image: heroCard2,
     },
     {
-      id: '3',
       title: 'Why DUX',
       description: 'Explore the DUX difference',
       image: heroCard3,

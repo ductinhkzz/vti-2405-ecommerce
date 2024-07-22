@@ -1,16 +1,11 @@
+import { twMerge } from 'tailwind-merge';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 
-import { Button, ButtonVariant } from '../Button';
-import { twMerge } from 'tailwind-merge';
+import { Button } from '../Button';
+import { ActionType } from '@/types';
 
 type BlockActionsProps = {
-  actions?: Array<{
-    url: string;
-    text: string;
-    variant?: ButtonVariant;
-    arrowIcon?: boolean;
-    color?: 'primary' | 'secondary';
-  }>;
+  actions?: ActionType[];
   className?: string;
 };
 
@@ -32,4 +27,4 @@ const BlockActions = ({ actions = [], className }: BlockActionsProps) => {
   );
 };
 
-export default BlockActions;
+export { BlockActions };

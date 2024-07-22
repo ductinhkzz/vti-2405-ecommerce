@@ -1,0 +1,18 @@
+.slider_actions {
+  @apply contents;
+
+  .right,
+  .left {
+    @apply absolute z-10;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .left {
+    @apply left-8;
+  }
+
+  .right {
+    @apply right-8;
+  }
+}

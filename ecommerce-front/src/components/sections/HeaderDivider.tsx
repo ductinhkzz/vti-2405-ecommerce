@@ -1,6 +1,6 @@
 import { ButtonVariant } from '../Button';
 import { Container } from '../Container';
-import BlockActions from './BlockActions';
+import { BlockActions } from './BlockActions';
 
 export type HeaderDividerProps = {
   sub_title?: string;

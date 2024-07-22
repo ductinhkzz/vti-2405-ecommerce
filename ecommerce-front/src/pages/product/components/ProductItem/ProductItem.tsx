@@ -1,6 +1,7 @@
+import { NavLink } from 'react-router-dom';
+
 import { IProduct } from '@/redux/types';
 import ProductPrice from './ProductPrice';
-import { NavLink } from 'react-router-dom';
 import { Button } from '@/components';
 
 type ProductItemProps = {
@@ -9,7 +10,7 @@ type ProductItemProps = {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <NavLink to={`product/${product.id}`} className='group relative'>
+    <NavLink to={`/product/${product.id}`} className='group relative'>
       <div className='aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
         <img
           src={product.thumbnail}

@@ -22,6 +22,11 @@ export interface IProduct extends IBase {
   options: IProductOption[];
   thumbnail: string;
   variants?: IProductVariant[];
+  width: number | null;
+  height: number | null;
+  length: number | null;
+  weight: number | null;
+  description: string | null;
 }
 
 export interface IProductOption extends IBase {
@@ -64,7 +69,7 @@ export type GetProductsRequest = {
   limit?: number;
   offset?: number;
   collection_id?: string[];
-}
+};
 
 export type GetProductsResponse = {
   count: number;

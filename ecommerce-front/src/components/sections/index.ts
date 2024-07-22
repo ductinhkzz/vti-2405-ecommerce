@@ -5,3 +5,5 @@ export * from './CardSection';
 export * from './CardListBlock';
 export * from './TextBlock';
 export * from './ImageList';
+export * from './BlockActions';
+export * from './ImageSliderSection';

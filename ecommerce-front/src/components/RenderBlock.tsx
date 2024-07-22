@@ -1,9 +1,15 @@
 import {
+  CardSliderSection,
+  CardSliderSectionProps,
   HeaderDivider,
   HeaderDividerProps,
+  HeroCardBlockSection,
+  HeroCardBlockSectionProps,
   HeroSection,
   ImageList,
   ImageListProps,
+  ImageSliderSection,
+  ImageSliderSectionProps,
   TextBlock,
   TextBlockProps,
 } from './sections';
@@ -18,6 +24,12 @@ const RenderBlock = (props: Record<string, any>) => {
       return <HeaderDivider {...(props as HeaderDividerProps)} />;
     case 'image-list-block':
       return <ImageList {...(props as ImageListProps)} />;
+    case 'hero-card-block':
+      return <HeroCardBlockSection {...(props as HeroCardBlockSectionProps)} />;
+    case 'card-slider-block':
+      return <CardSliderSection {...(props as CardSliderSectionProps)} />;
+    case 'image-slider-block':
+      return <ImageSliderSection {...(props as ImageSliderSectionProps)} />;
     default:
       return null;
   }
