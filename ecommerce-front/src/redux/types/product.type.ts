@@ -21,7 +21,7 @@ export interface IProduct extends IBase {
   metadata: Record<string, string>;
   options: IProductOption[];
   thumbnail: string;
-  variants?: IProductVariant[];
+  variants: IProductVariant[];
   width: number | null;
   height: number | null;
   length: number | null;
@@ -49,6 +49,9 @@ export interface IProductVariant extends IBase {
   weight: number | null;
   options: IProductVariantOption[];
   prices: IPrice[];
+  manage_inventory: boolean;
+  allow_backorder: boolean;
+  sku?: string | null;
 }
 
 export interface IProductVariantOption extends IBase {

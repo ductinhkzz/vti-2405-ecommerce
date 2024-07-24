@@ -6,7 +6,7 @@ import { omit } from 'lodash-es';
 import { useCustomer, usePageTitle, useRedux, useToast } from '@/hooks';
 import { Input, Select } from '@/components';
 import { accountSchema } from '@/helpers';
-import { useLoginMutation, useUpdateCustomerMutation, useGetRegionQuery } from '@/redux/api';
+import { useLoginMutation, useUpdateCustomerMutation } from '@/redux/api';
 import { setCustomer } from '@/redux/reducers';
 import { IAddress } from '@/redux/types';
 import { FormEdit } from './components';
@@ -17,10 +17,6 @@ const Profile = () => {
   const customer = useCustomer();
   const { dispatch, appSelector } = useRedux();
   const { countryOptions } = appSelector((state) => state.global);
-
-  useGetRegionQuery(undefined, {
-    skip: countryOptions.length !== 0,
-  });
 
   const [updateCustomer, { isSuccess }] = useUpdateCustomerMutation();
   const [auth] = useLoginMutation();

@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, UserIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
 
 import { NAVIGATIONS } from '@/constants';
 import { LogoIcon } from '@/components';
 import { useRedux } from '@/hooks';
+import { GlobalStateType } from '@/redux/reducers';
 
 const Header = () => {
   const { appSelector } = useRedux();
   const { customer } = appSelector((state) => state.auth);
+  const { cart } = appSelector<GlobalStateType>((state) => state.global);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const totalItems = cart?.items?.reduce((acc, item) => acc + item.quantity, 0) ?? 0;
 
   return (
     <header className='absolute inset-x-0 top-0 z-50'>
@@ -37,16 +41,21 @@ const Header = () => {
             </Link>
           ))}
         </div>
-        <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
+        <div className='hidden lg:flex lg:flex-1 lg:justify-end gap-4'>
           {customer === undefined ? (
             <NavLink to='/login' className='text-sm font-semibold leading-6 text-gray-900'>
               Log in <span aria-hidden='true'>&rarr;</span>
             </NavLink>
           ) : (
-            <NavLink to='/account/overview' className='text-sm font-medium leading-6 text-gray-900 flex items-center gap-x-1'>
+            <NavLink
+              to='/account/overview'
+              className='text-sm font-normal leading-6 text-gray-900 flex items-center gap-x-1'>
               <UserIcon className='w-4 h-4' /> Account
             </NavLink>
           )}
+          <NavLink to='/cart' className='text-sm font-normal leading-6 text-gray-900 flex items-center gap-x-1'>
+            <ShoppingCartIcon className='w-4 h-4' /> Cart ({totalItems})
+          </NavLink>
         </div>
       </nav>
       <Dialog className='lg:hidden' open={mobileMenuOpen} onClose={setMobileMenuOpen}>

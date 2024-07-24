@@ -12,3 +12,5 @@ export type ActionType = {
   arrowIcon?: boolean;
   color?: 'primary' | 'secondary';
 };
+
+export type ThemeType = 'gray' | 'warm-gray' | 'white' | 'black' | 'cool-gray';

@@ -3,7 +3,7 @@ import { api } from './baseApi';
 
 export const regionApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getRegion: builder.query<IRegion[], void>({
+    getRegions: builder.query<IRegion[], void>({
       query() {
         return {
           url: 'store/regions',
@@ -17,4 +17,4 @@ export const regionApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetRegionQuery } = regionApi;
+export const { useGetRegionsQuery } = regionApi;

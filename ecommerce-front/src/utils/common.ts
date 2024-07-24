@@ -41,3 +41,5 @@ export const objectToParams = (obj: Record<string, string | number | string[] | 
 
   return params.toString();
 };
+
+export const onlyUnique = (value: unknown, index: number, self: unknown[]) => self.indexOf(value) === index;

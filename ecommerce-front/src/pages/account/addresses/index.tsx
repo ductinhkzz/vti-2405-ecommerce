@@ -4,12 +4,7 @@ import { useEffect } from 'react';
 
 import { useCRUD, useCustomer, usePageTitle, useRedux, useToast } from '@/hooks';
 import { addressSchema, AddressSchemaType } from '@/helpers';
-import {
-  useAddShippingAddressMutation,
-  useDeleteAddressMutation,
-  useGetRegionQuery,
-  useUpdateShippingAddressMutation,
-} from '@/redux/api';
+import { useAddShippingAddressMutation, useDeleteAddressMutation, useUpdateShippingAddressMutation } from '@/redux/api';
 import { AddressCard, CreateAddressCard } from './components';
 import { PageHeader } from '../components';
 import { WarningModal } from '@/modals';
@@ -30,9 +25,6 @@ const Addresses = () => {
     useUpdateShippingAddressMutation();
   const [deleteAddress, { isLoading: isDeleteLoading, isError: isDeleteError, isSuccess: isDeleteSuccess }] =
     useDeleteAddressMutation();
-  useGetRegionQuery(undefined, {
-    skip: countryOptions.length !== 0,
-  });
 
   const form = useForm({
     resolver: yupResolver(addressSchema),

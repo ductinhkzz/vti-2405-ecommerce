@@ -48,11 +48,12 @@ export const productApi = api.injectEndpoints({
         };
       },
     }),
-    getProduct: builder.query<IProduct, { id: string }>({
-      query({ id }) {
+    getProduct: builder.query<IProduct, { id: string; region_id?: string }>({
+      query({ id, ...arg }) {
         return {
           url: `store/products/${id}`,
           method: 'GET',
+          params: { ...arg },
         };
       },
       transformResponse: (response: { product: IProduct }) => {

@@ -1,20 +1,31 @@
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useGetProductQuery } from '@/redux/api';
-import { ProductBanner, ProductInfo, ProductSlider } from './components';
-import { RenderBlock } from '@/components';
+import { useGetProductQuery, useGetRegionsQuery } from '@/redux/api';
+import { ProductActions, ProductBanner, ProductInfo, ProductSlider } from './components';
+import { LoadingOverlay, RenderBlock } from '@/components';
+
+const DEFAULT_COUNTRY = 'vn';
 
 const Product = () => {
-  const { id = '' } = useParams<'id'>();
-  const { data, isLoading } = useGetProductQuery({ id }, { skip: !id });
+  const { region } = useGetRegionsQuery(undefined, {
+    selectFromResult: ({ data = [] }) => {
+      const region = data.find((r) => r.countries.some((c) => c.iso_2 === DEFAULT_COUNTRY));
+      return {
+        region,
+      };
+    },
+  });
 
-  if ((!id || !data) && isLoading === false) {
-    return <Navigate to='404' />;
+  const { id = '' } = useParams<'id'>();
+  const { data, isLoading } = useGetProductQuery({ id, region_id: region?.id }, { skip: !id || !region?.id });
+
+  if (isLoading) {
+    return <LoadingOverlay />;
   }
 
-  console.log('============================');
-  console.log(data);
-  console.log('============================');
+  if (!id || !data || !region) {
+    return <Navigate to='404' />;
+  }
 
   const top_blocks: any[] = [
     {
@@ -42,6 +53,52 @@ const Product = () => {
         'https://dux.prod.kan.solutions/siteassets/images/products/bed-accessories/top-pad/top-pad-slide1.jpg',
       ],
     },
+    {
+      type: 'image-slider-block',
+      sub_title: 'Dynamic Support',
+      title: 'SWEDISH STEEL CONTINUOUS COIL SPRING DESIGN',
+      description: `Only the dynamic nature of a spring system can contour to all of your movements at night. The revolutionary DUX spring system adjusts itself to the weight and shape of your body. It moves as you move. It conforms to your contours, providing continuous, dynamic support along every point of your body. The DUX spring design is neither too firm nor too soft. It is flexible enough to let your shoulders and hips sink in, yet resilient enough to rise up and support your lower back. Vital pressure points — especially your spine — are supported in the most ergonomically healthy positions possible, letting your blood circulate freely while your muscles completely relax.`,
+      images: ['https://dux.prod.kan.solutions/siteassets/images/why-dux/innovation/springs_947x467.jpg'],
+      actions: [
+        {
+          text: 'Continuous Spring Innovation',
+          url: '/why-dux/innovation',
+        },
+      ],
+      theme: 'cool-gray',
+    },
+    {
+      type: 'hero-block',
+      medias: [
+        {
+          url: 'https://dux.prod.kan.solutions/siteassets/images/products/beds/dux_1001_interior_1920x714.jpg?width=1430&height=953&mode=crop',
+        },
+      ],
+    },
+    {
+      type: 'header-divider-block',
+      title: 'Sustainable Craftmanship',
+      description: `Long-lasting materials, human-ecological highest standards, customizable components. We apply the sustainable approach to every step of the DUX production process. Our furniture's and beds' life cycle is based on the Replace, Renew, and Restore strategy.`,
+      actions: [
+        {
+          text: 'Sustainability, quality, and longevity',
+          url: '/why-dux/sustainability',
+        },
+      ],
+      theme: 'warm-gray',
+    },
+    {
+      type: 'image-slider-block',
+      sub_title: 'INNOVATION',
+      title: 'THE DUX BED WITH INTERIOR FRAME AND VARIABLE LEG HEIGHTS',
+      description:
+        'Designed like a piece of furniture, The DUX Bed’s interior frame allows you to simply select the leg style, height, and color of your choice and fasten the leg to the frame by threading it into place.',
+      images: [
+        'https://dux.prod.kan.solutions/siteassets/images/why-dux/interior-frame-mattress/internal-frame-mattress-dt.jpg',
+        'https://dux.prod.kan.solutions/siteassets/images/why-dux/interior-frame-mattress/interior-frame-mattress-banner.jpg',
+        'https://dux.prod.kan.solutions/siteassets/images/why-dux/interior-frame-mattress/leg-teaser.jpg',
+      ],
+    },
   ];
 
   return (
@@ -63,8 +120,9 @@ const Product = () => {
           },
         ]}
       />
-      <ProductSlider images={data?.images} />
-      {data && <ProductInfo {...data} />}
+      <ProductSlider images={data.images} />
+      <ProductActions product={data} region={region} />
+      <ProductInfo {...data} />
       {top_blocks.map((block) => (
         <RenderBlock key={`${block.type}_${block.title}`} {...block} />
       ))}

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import clsx from 'clsx';
 import { useKeenSlider } from 'keen-slider/react';
 
-import { ActionType } from '@/types';
+import { ActionType, ThemeType } from '@/types';
 import { BlockActions } from './BlockActions';
 import classes from './ImageSliderSection.module.scss';
 
@@ -11,7 +11,7 @@ export type ImageSliderSectionProps = {
   title?: string;
   description?: string;
   actions?: ActionType[];
-  theme?: 'gray' | 'warm-gray' | 'white' | 'black';
+  theme?: ThemeType;
 };
 
 const DURATION = 3000;
@@ -74,7 +74,7 @@ const ImageSliderSection = ({ images = [], title, description, actions, theme = 
         if (prevProgress >= 100) {
           return 0;
         }
-        return prevProgress + 100 / (DURATION / 16.67); // update every ~16.67ms for 60fps
+        return prevProgress + 100 / (DURATION / 16.66); // update every ~16.67ms for 60fps
       });
     };
 
@@ -97,7 +97,7 @@ const ImageSliderSection = ({ images = [], title, description, actions, theme = 
   }, [loaded, currentSlide]);
   return (
     <div className='flex justify-center items-center'>
-      <div className={clsx('w-full grid grid-cols-2 grid-rows-1 py-24', `theme-${theme}`)}>
+      <div className={clsx('w-full relative grid grid-cols-2 grid-rows-1 py-24', `theme-${theme}`)}>
         <div className='col-start-1 row-start-1 flex flex-col justify-center items-center px-16 py-4'>
           <div className='p-20'>
             {title && <h2 className='tracking-wide text-3xl uppercase mb-4'>{title}</h2>}
