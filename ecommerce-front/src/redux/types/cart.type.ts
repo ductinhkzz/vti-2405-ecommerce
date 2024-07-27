@@ -37,7 +37,7 @@ export interface ILineItem extends IBase {
   unit_price: number;
   variant_id: string | null;
   variant: IProductVariant;
-  product_id: string | null;
+  product: string | null;
   quantity: number;
   fulfilled_quantity: number | null;
   returned_quantity: number | null;
@@ -166,3 +166,7 @@ export interface ICart extends IBase {
   gift_card_total?: number;
   gift_card_tax_total?: number;
 }
+
+export type CartWithCheckoutStep = ICart & {
+  checkout_step: 'address' | 'delivery' | 'payment';
+};

@@ -132,6 +132,7 @@ const ProductActions = ({ product, region, disabled }: ProductActionsProps) => {
         .then((cart) => {
           dispatch(setCart(cart));
           setCookie('_duxiana_cart_id', cart.id, {
+            path: '/',
             maxAge: 60 * 60 * 24 * 7,
             sameSite: 'strict',
             secure: process.env.NODE_ENV === 'production',

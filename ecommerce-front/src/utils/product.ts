@@ -118,6 +118,13 @@ export const formatAmount = ({ amount, region, includeTaxes = true, ...rest }: F
   });
 };
 
+export const getPercentageDiff = (original: number, calculated: number) => {
+  const diff = original - calculated;
+  const decrease = (diff / original) * 100;
+
+  return decrease.toFixed();
+};
+
 export function getProductPrice({
   product,
   variantId,
@@ -130,13 +137,6 @@ export function getProductPrice({
   if (!product?.id) {
     throw new Error('No product provided');
   }
-
-  const getPercentageDiff = (original: number, calculated: number) => {
-    const diff = original - calculated;
-    const decrease = (diff / original) * 100;
-
-    return decrease.toFixed();
-  };
 
   const cheapestPrice = () => {
     if (!product.variants || !region) {

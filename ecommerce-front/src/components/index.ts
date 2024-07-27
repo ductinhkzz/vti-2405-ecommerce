@@ -9,3 +9,4 @@ export * from './IconButton';
 export * from './Slider';
 export * from './Container';
 export * from './RenderBlock';
+export * from './Divider';

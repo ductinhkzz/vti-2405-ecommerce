@@ -52,6 +52,8 @@ export interface IProductVariant extends IBase {
   manage_inventory: boolean;
   allow_backorder: boolean;
   sku?: string | null;
+  product: IProduct;
+  product_id: string | null;
 }
 
 export interface IProductVariantOption extends IBase {
@@ -72,6 +74,8 @@ export type GetProductsRequest = {
   limit?: number;
   offset?: number;
   collection_id?: string[];
+  id?: string[];
+  region_id?: string;
 };
 
 export type GetProductsResponse = {

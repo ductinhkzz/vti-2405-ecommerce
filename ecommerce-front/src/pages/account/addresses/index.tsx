@@ -118,7 +118,7 @@ const Addresses = () => {
       <div className='w-full'>
         <div className='grid grid-cols-2 gap-4'>
           <CreateAddressCard onOpen={onOpenCreateModal} />
-          {customer.shipping_addresses?.map((address) => (
+          {customer?.shipping_addresses?.map((address) => (
             <AddressCard key={address.id} {...address} onClickAction={onClickAction} />
           ))}
         </div>

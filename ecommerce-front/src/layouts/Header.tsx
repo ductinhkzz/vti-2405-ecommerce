@@ -43,7 +43,7 @@ const Header = () => {
         </div>
         <div className='hidden lg:flex lg:flex-1 lg:justify-end gap-4'>
           {customer === undefined ? (
-            <NavLink to='/login' className='text-sm font-semibold leading-6 text-gray-900'>
+            <NavLink to='/login' className='text-sm font-normal leading-6 text-gray-900'>
               Log in <span aria-hidden='true'>&rarr;</span>
             </NavLink>
           ) : (

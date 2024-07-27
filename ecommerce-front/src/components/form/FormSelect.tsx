@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 export interface FormSelectProps extends HTMLAttributes<HTMLSelectElement> {
   required?: boolean;
+  value?: string | number | readonly string[] | undefined;
 }
 
 const FormSelect = forwardRef(({ className, ...props }: FormSelectProps, ref: Ref<HTMLSelectElement>) => {
