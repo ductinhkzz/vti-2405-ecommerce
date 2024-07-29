@@ -27,6 +27,19 @@ export const cartApi = api.injectEndpoints({
         return response.cart;
       },
     }),
+    updateCart: builder.mutation<ICart, Omit<Partial<ICart>, 'id'> & { id: ICart['id'] }>({
+      query({ id, ...arg }) {
+        return {
+          url: `store/carts/${id}`,
+          method: 'POST',
+          body: { ...arg },
+        };
+      },
+      transformResponse: (response: { cart: ICart }) => {
+        return response.cart;
+      },
+      invalidatesTags: (arg) => [{ type: 'Cart', id: arg?.id }],
+    }),
     addLineItemsToCard: builder.mutation<ICart, { cart_id: string; variant_id: string; quantity: number }>({
       query({ cart_id, ...arg }) {
         return {
@@ -69,6 +82,7 @@ export const cartApi = api.injectEndpoints({
 
 export const {
   useGetCartQuery,
+  useUpdateCartMutation,
   useCreateCartMutation,
   useAddLineItemsToCardMutation,
   useUpdateLineItemMutation,

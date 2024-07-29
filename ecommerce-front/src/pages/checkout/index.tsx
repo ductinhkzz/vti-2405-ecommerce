@@ -30,22 +30,15 @@ const Checkout = () => {
     }
   }, [cart?.id]);
 
-  console.log('============================');
-  console.log(_cart);
-  console.log('============================');
-  console.log('============================');
-  console.log(customer);
-  console.log('============================');
-  console.log('============================');
-  console.log(availableShippingMethods);
-  console.log('============================');
   return (
-    <div className='grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12'>
-      {loading ? (
-        <LoadingOverlay />
-      ) : (
-        <CheckoutWithData cart={_cart} customer={customer} shippingOptions={availableShippingMethods} />
-      )}
+    <div className='flex justify-center'>
+      <div className='w-full grid grid-cols-1 small:grid-cols-[1fr_416px] max-w-screen-2xl gap-x-40 py-12'>
+        {loading ? (
+          <LoadingOverlay />
+        ) : (
+          <CheckoutWithData cart={_cart} customer={customer} shippingOptions={availableShippingMethods} />
+        )}
+      </div>
     </div>
   );
 };

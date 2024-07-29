@@ -14,10 +14,10 @@ const CheckoutWithData = ({ customer, shippingOptions, cart }: CheckoutWithDataP
   }
 
   return (
-    <div>
+    <>
       <CheckoutForm cart={cart} shippingOptions={shippingOptions} customer={customer} />
       <CheckoutSummary />
-    </div>
+    </>
   );
 };
 
