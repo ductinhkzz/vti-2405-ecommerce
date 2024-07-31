@@ -32,7 +32,7 @@ const Checkout = () => {
 
   return (
     <div className='flex justify-center'>
-      <div className='w-full grid grid-cols-1 small:grid-cols-[1fr_416px] max-w-screen-2xl gap-x-40 py-12'>
+      <div className='w-full grid grid-cols-1 sm:grid-cols-[1fr_416px] max-w-screen-2xl gap-x-20 py-12'>
         {loading ? (
           <LoadingOverlay />
         ) : (

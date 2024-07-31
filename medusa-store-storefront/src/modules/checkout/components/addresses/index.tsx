@@ -48,9 +48,7 @@ const Addresses = ({
   }
 
   const [message, formAction] = useFormState(setAddresses, null)
-  console.log('============================');
-  console.log(cart);
-  console.log('============================');
+
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">

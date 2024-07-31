@@ -4,23 +4,17 @@ import { useCookies } from 'react-cookie';
 import { NavLink } from 'react-router-dom';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
-import { ILineItem, IRegion } from '@/redux/types';
+import { useUpdateLineItemMutation } from '@/redux/api';
 import { IconButton, Select } from '@/components';
 import LineItemUnitPrice from './LineItemUnitPrice';
 import LineItemPrice from './LineItemPrice';
-import { useUpdateLineItemMutation } from '@/redux/api';
-
-type ItemProps = {
-  item: ILineItem;
-  region: IRegion;
-  type?: 'full' | 'preview';
-};
+import { ItemProps } from './types';
 
 const Item = ({ item, region, type = 'full' }: ItemProps) => {
   const [cookies] = useCookies(['_duxiana_cart_id']);
   const [updateLineItem, { isLoading }] = useUpdateLineItemMutation();
   const cardId = cookies['_duxiana_cart_id'];
-  const product_id = item.variant.product.id;
+  const product_id = item.variant.product_id;
   const quantityOptions = Array.from(
     {
       length: Math.min(item.variant.inventory_quantity > 0 ? item.variant.inventory_quantity : 10, 10),
@@ -38,8 +32,8 @@ const Item = ({ item, region, type = 'full' }: ItemProps) => {
   };
 
   return (
-    <tr className='w-full' data-testid='product-row'>
-      <td className='p-2'>
+    <tr className='w-full hover:bg-gray-100' data-testid='product-row'>
+      <td className={clsx({ 'p-2 w-20 h-20': type === 'full', 'w-16 h-16': type === 'preview' })}>
         <NavLink to={`/product/${product_id}`} className='w-full flex justify-center'>
           <img
             src={item.thumbnail ?? undefined}

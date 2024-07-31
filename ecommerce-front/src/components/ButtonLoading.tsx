@@ -5,7 +5,11 @@ interface ButtonLoadingProps extends ButtonProps {
 }
 
 const ButtonLoading = ({ isLoading, children, ...props }: ButtonLoadingProps) => {
-  return <Button {...props} disabled={isLoading}>{!isLoading ? children : 'Loading...'}</Button>;
+  return (
+    <Button {...props} disabled={isLoading || props.disabled}>
+      {!isLoading ? children : 'Loading...'}
+    </Button>
+  );
 };
 
 export { ButtonLoading };

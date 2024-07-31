@@ -19,7 +19,7 @@ import AddressSelect from './AddressSelect';
 
 type AddressProps = {
   cart: CartWithCheckoutStep;
-  customer: ICustomer;
+  customer?: ICustomer | null;
 };
 
 const Address = ({ cart, customer }: AddressProps) => {
@@ -29,7 +29,7 @@ const Address = ({ cart, customer }: AddressProps) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [updateCart, { isLoading, isSuccess }] = useUpdateCartMutation();
 
-  const addresses = customer.shipping_addresses ?? [];
+  const addresses = customer?.shipping_addresses ?? [];
   const selectedAddress = useMemo(() => {
     return addresses.find((a) => compareAddresses(a, cart?.shipping_address));
   }, [addresses, cart?.shipping_address]);

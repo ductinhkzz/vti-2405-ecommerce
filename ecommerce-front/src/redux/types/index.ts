@@ -6,3 +6,4 @@ export * from './product.type';
 export * from './image.type';
 export * from './cart.type';
 export * from './shipping-option.type';
+export * from './order.type';

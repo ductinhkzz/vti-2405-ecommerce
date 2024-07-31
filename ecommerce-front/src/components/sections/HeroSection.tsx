@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { Container } from '../Container';
 import { BlockActions } from './BlockActions';
 import { ActionType } from '@/types';
+import { Text } from '../Typography';
 interface HeroSectionProps {
   description?: string;
   title?: string;
@@ -66,9 +67,9 @@ const HeroSection = ({
               'justify-self-stretch xl:basis-3/5 2xl:p-48 xl:p-32 lg:p-24 md:p-20 p-4 flex flex-col gap-y-4 justify-center items-center sm:items-start',
               mediaHasLeftOrRight && '2xl:p-36',
             )}>
-            {sub_title && <p className='tracking-widest uppercase text-xs'>{sub_title}</p>}
-            {title && <h2 className='tracking-wide text-3xl uppercase'>{title}</h2>}
-            {description && <p className='text-xs mb-8 text-center sm:text-start'>{description}</p>}
+            {sub_title && <Text uppercase size='xs' tracking='wider' className='mb-2'>{sub_title}</Text>}
+            {title && <Text uppercase size='xl' tracking='wide' className='mb-4'>{title}</Text>}
+            {description && <Text size='xs' className='mb-8 text-center sm:text-start'>{description}</Text>}
             <BlockActions actions={actions} />
           </div>
         </div>

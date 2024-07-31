@@ -1,12 +1,14 @@
-import { Container, Divider, LoadingOverlay } from '@/components';
-import { ItemList, SignInPrompt, Summary } from './components';
-import { useCustomer, useRedux } from '@/hooks';
-import { GlobalStateType } from '@/redux/reducers';
-import { useGetProductsQuery } from '@/redux/api';
 import { useMemo } from 'react';
-import { getCheckoutStep } from '@/utils';
-import { CartWithCheckoutStep, ILineItem } from '@/redux/types';
 import { omit } from 'lodash-es';
+
+import { getCheckoutStep } from '@/utils';
+import { useCustomer, useRedux } from '@/hooks';
+import { useGetProductsQuery } from '@/redux/api';
+import { GlobalStateType } from '@/redux/reducers';
+import { Button, Container, Divider, LoadingOverlay } from '@/components';
+import { SignInPrompt } from './components';
+import { CartWithCheckoutStep, ILineItem } from '@/redux/types';
+import { ItemsTemplate, Summary } from '@/templates';
 
 const Cart = () => {
   const { appSelector } = useRedux();
@@ -71,13 +73,18 @@ const Cart = () => {
                 <Divider />
               </>
             )}
-            <ItemList region={cart?.region} items={lineItems} />
+            <ItemsTemplate region={cart?.region} items={lineItems} type='full' />
           </div>
           <div className='Relative'>
             <div className='flex flex-col gap-y-8 sticky top-12'>
               {_cart && regionId && (
                 <div className='bg-white py-6'>
-                  <Summary cart={_cart} />
+                  <Summary cart={_cart} title='Summary' />
+                  <a href={'/checkout?step=' + _cart.checkout_step} className='w-full'>
+                    <Button color='secondary' className='w-full'>
+                      Go to checkout
+                    </Button>
+                  </a>
                 </div>
               )}
             </div>

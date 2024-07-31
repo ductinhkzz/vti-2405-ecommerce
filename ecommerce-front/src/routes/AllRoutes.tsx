@@ -12,6 +12,7 @@ const Product = React.lazy(() => import('@/pages/product'));
 const Collection = React.lazy(() => import('@/pages/product/collection'));
 const Cart = React.lazy(() => import('@/pages/cart'));
 const Checkout = React.lazy(() => import('@/pages/checkout'));
+const OrderCompleted = React.lazy(() => import('@/pages/order/completed'));
 const ContactUs = React.lazy(() => import('@/pages/contact-us'));
 const AboutUs = React.lazy(() => import('@/pages/about-us'));
 //Account
@@ -37,6 +38,7 @@ const AllRoutes = () => {
           <Route path='/about-us' element={<LoadComponent component={AboutUs} />} />
           <Route path='/cart' element={<LoadComponent component={Cart} />} />
           <Route path='/checkout' element={<LoadComponent component={Checkout} />} />
+          <Route path='/order/completed/:id' element={<LoadComponent component={OrderCompleted} />} />
           <Route element={<RequiredLogin Component={AccountLayout} />}>
             <Route path='account/overview' element={<LoadComponent component={Overview} />} />
             <Route path='account/profile' element={<LoadComponent component={Profile} />} />

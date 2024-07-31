@@ -1,15 +1,10 @@
-import { ILineItem, IRegion } from '@/redux/types';
-import { CalculatedVariant } from '@/types';
-import { formatAmount, getPercentageDiff } from '@/utils';
 import clsx from 'clsx';
 
-type LineItemUnitPriceProps = {
-  item: ILineItem;
-  region: IRegion;
-  style?: 'default' | 'tight';
-};
+import { CalculatedVariant } from '@/types';
+import { formatAmount, getPercentageDiff } from '@/utils';
+import { LineItemPriceProps } from './types';
 
-const LineItemUnitPrice = ({ item, region, style = 'default' }: LineItemUnitPriceProps) => {
+const LineItemUnitPrice = ({ item, region, style = 'default' }: LineItemPriceProps) => {
   const originalPrice = (item.variant as CalculatedVariant).original_price;
   const hasReducedPrice = (originalPrice * item.quantity || 0) > item.total!;
   const reducedPrice = (item.total ?? 0) / item.quantity;

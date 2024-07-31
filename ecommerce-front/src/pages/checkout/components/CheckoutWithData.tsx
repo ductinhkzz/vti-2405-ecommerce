@@ -9,14 +9,14 @@ type CheckoutWithDataProps = {
 };
 
 const CheckoutWithData = ({ customer, shippingOptions, cart }: CheckoutWithDataProps) => {
-  if (!customer || shippingOptions.length === 0 || !cart) {
+  if (shippingOptions.length === 0 || !cart) {
     return null;
   }
 
   return (
     <>
       <CheckoutForm cart={cart} shippingOptions={shippingOptions} customer={customer} />
-      <CheckoutSummary />
+      <CheckoutSummary cart={cart} />
     </>
   );
 };

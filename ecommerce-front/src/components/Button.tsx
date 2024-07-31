@@ -37,7 +37,7 @@ const ButtonColorClass: Record<ButtonColor, Record<ButtonVariant, string>> = {
     outlined:
       'border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white disabled:text-gray-200 disabled:border-gray-200 disabled:bg-white',
     text: 'border-transparent text-gray-900 hover:border-gray-900',
-    contained: 'text-white bg-gray-900 hover:bg-gray-800',
+    contained: 'text-white bg-gray-900 disabled:bg-gray-700 hover:bg-gray-800',
   },
 };
 

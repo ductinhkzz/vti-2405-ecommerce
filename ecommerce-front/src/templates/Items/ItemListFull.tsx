@@ -1,12 +1,7 @@
-import { ILineItem, IRegion } from '@/redux/types';
 import Item from './Item';
+import { ItemListProps } from './types';
 
-type ItemListProps = {
-  items?: ILineItem[];
-  region?: IRegion;
-};
-
-const ItemList = ({ items = [], region }: ItemListProps) => {
+const ItemListFull = ({ items = [], region }: ItemListProps) => {
   const sortedItems = [...items].sort((a, b) => {
     return a.created_at > b.created_at ? -1 : 1;
   });
@@ -19,7 +14,7 @@ const ItemList = ({ items = [], region }: ItemListProps) => {
       <table className='w-full table-auto'>
         <thead className='border-t-0'>
           <tr className='text-ui-fg-subtle txt-medium-plus'>
-            <th className='!pl-0'>Item</th>
+            <th className='w-24'>Item</th>
             <th></th>
             <th className='text-center'>Quantity</th>
             <th className='hidden small:table-cell'>Price</th>
@@ -37,4 +32,4 @@ const ItemList = ({ items = [], region }: ItemListProps) => {
   );
 };
 
-export { ItemList };
+export default ItemListFull;

@@ -5,10 +5,12 @@ import { useKeenSlider } from 'keen-slider/react';
 import { ActionType, ThemeType } from '@/types';
 import { BlockActions } from './BlockActions';
 import classes from './ImageSliderSection.module.scss';
+import { Text } from '../Typography';
 
 export type ImageSliderSectionProps = {
   images?: string[];
   title?: string;
+  sub_title?: string;
   description?: string;
   actions?: ActionType[];
   theme?: ThemeType;
@@ -16,7 +18,7 @@ export type ImageSliderSectionProps = {
 
 const DURATION = 3000;
 
-const ImageSliderSection = ({ images = [], title, description, actions, theme = 'white' }: ImageSliderSectionProps) => {
+const ImageSliderSection = ({ images = [], title,sub_title, description, actions, theme = 'white' }: ImageSliderSectionProps) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [progress, setProgress] = React.useState(0);
   const [loaded, setLoaded] = React.useState(false);
@@ -100,8 +102,9 @@ const ImageSliderSection = ({ images = [], title, description, actions, theme = 
       <div className={clsx('w-full relative grid grid-cols-2 grid-rows-1 py-24', `theme-${theme}`)}>
         <div className='col-start-1 row-start-1 flex flex-col justify-center items-center px-16 py-4'>
           <div className='p-20'>
-            {title && <h2 className='tracking-wide text-3xl uppercase mb-4'>{title}</h2>}
-            {description && <p className='text-xs mb-8 text-center sm:text-start'>{description}</p>}
+            {sub_title && <Text uppercase size='xs' tracking='wider' className='mb-2'>{sub_title}</Text>}
+            {title && <Text uppercase size='xl' tracking='wide' className='mb-4'>{title}</Text>}
+            {description && <Text size='xs' className='mb-8 text-center sm:text-start'>{description}</Text>}
             <BlockActions actions={actions} />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { ICustomer } from './auth.type';
 import { IBase } from './common';
 import { IProductVariant } from './product.type';
 import { IRegion } from './region.type';
+import { IShippingOption } from './shipping-option.type';
 
 export declare enum CartType {
   DEFAULT = 'default',
@@ -107,6 +108,7 @@ export interface IPayment extends IBase {
 export interface IShippingMethod {
   id: string;
   shipping_option_id: string;
+  shipping_option: IShippingOption;
   order_id: string;
   // order: Order;
   claim_order_id: string | null;

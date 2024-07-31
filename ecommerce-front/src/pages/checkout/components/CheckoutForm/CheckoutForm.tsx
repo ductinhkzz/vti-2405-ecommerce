@@ -1,11 +1,11 @@
 import { CartWithCheckoutStep, ICustomer, IShippingOption } from '@/redux/types';
 import { Address } from './Address';
-import Shipping from './Shipping';
-import Payment from './Payment';
+import { Shipping } from './Shipping';
+import { Payment } from './Payment';
 import Review from './Review';
 
 type CheckoutFormProps = {
-  customer: ICustomer;
+  customer?: ICustomer | null;
   shippingOptions: IShippingOption[];
   cart: CartWithCheckoutStep;
 };

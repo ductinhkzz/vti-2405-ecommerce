@@ -24,3 +24,8 @@ Note: "npm run seed" just run 1 time when setup this repo. The next time, just r
   npm i
   npm run dev
 ```
+
+## Admin account with database restore:
+
+- username: admin@gmail.com
+- password: Leductinhkx97

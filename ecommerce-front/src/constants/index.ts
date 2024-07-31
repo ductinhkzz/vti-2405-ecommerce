@@ -1,3 +1,6 @@
+import React from 'react';
+import { CreditCardIcon } from '@heroicons/react/24/outline';
+
 export const NAVIGATIONS = [
   { name: 'Product', href: '/product' },
   { name: 'Features', href: '#' },
@@ -20,3 +23,21 @@ export const ACCOUNT_NAVIGATIONS = [
   { name: 'Orders', href: '/account/orders' },
   { name: 'Log out', href: '/account/logout' },
 ];
+
+export const PAYMENT_INFO_MAP: Record<
+  string,
+  {
+    title: string;
+    icon: React.ForwardRefExoticComponent<
+      React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
+        title?: string;
+        titleId?: string;
+      } & React.RefAttributes<SVGSVGElement>
+    >;
+  }
+> = {
+  manual: {
+    title: 'Test payment',
+    icon: CreditCardIcon,
+  },
+};
