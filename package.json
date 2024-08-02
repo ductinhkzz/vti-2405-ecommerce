@@ -1,0 +1,17 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "scripts": {
+    "start:dev": "lerna run --ignore store-next-example dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "lerna": "^8.1.7"
+  }
+}
