@@ -10,9 +10,9 @@ const Overview = () => {
   return (
     <div className='flex-1'>
       <div className='flex justify-between items-center mb-4'>
-        <span className='text-2xl font-semibold'>Hello {customer.full_name}</span>
+        <span className='text-2xl font-semibold'>Hello {customer?.full_name}</span>
         <span className='text-sm'>
-          Signed in as: <span className='font-semibold'>{customer.email}</span>
+          Signed in as: <span className='font-semibold'>{customer?.email}</span>
         </span>
       </div>
       <div className='flex flex-col py-8 border-t border-gray-200'>

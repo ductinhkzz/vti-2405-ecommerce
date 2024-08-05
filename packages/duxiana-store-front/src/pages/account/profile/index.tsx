@@ -27,11 +27,11 @@ const Profile = () => {
     formState: { errors, isValid },
   } = useForm({
     values: {
-      first_name: customer.first_name ?? '',
-      last_name: customer.last_name ?? '',
-      email: customer.email ?? '',
-      phone: customer.phone ?? '',
-      billing_address: omit(customer.billing_address, [
+      first_name: customer?.first_name ?? '',
+      last_name: customer?.last_name ?? '',
+      email: customer?.email ?? '',
+      phone: customer?.phone ?? '',
+      billing_address: omit(customer?.billing_address, [
         'id',
         'created_at',
         'metadata',
@@ -44,7 +44,7 @@ const Profile = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    if (data.password && data.old_password && customer.email) {
+    if (data.password && data.old_password && customer?.email) {
       auth({ password: data.old_password, email: customer.email }).then((res) => {
         if (res.error) {
           toast('Old password is incorrect', 'error');
@@ -86,18 +86,18 @@ const Profile = () => {
           your billing address, or change your password.'
       />
       <div className='flex flex-col gap-y-8 w-full'>
-        <FormEdit title='Name' content={customer.full_name} onSubmit={onSubmit}>
+        <FormEdit title='Name' content={customer?.full_name} onSubmit={onSubmit}>
           <div className='grid grid-cols-2 gap-x-4 my-4'>
             <Input label='First name' type='text' {...register('first_name')} />
             <Input label='Last name' type='text' {...register('last_name')} />
           </div>
         </FormEdit>
-        <FormEdit title='Email' content={customer.email} onSubmit={onSubmit}>
+        <FormEdit title='Email' content={customer?.email} onSubmit={onSubmit}>
           <div className='my-4'>
             <Input label='Email' type='email' {...register('email')} />
           </div>
         </FormEdit>
-        <FormEdit title='Phone' content={customer.phone} onSubmit={onSubmit}>
+        <FormEdit title='Phone' content={customer?.phone} onSubmit={onSubmit}>
           <div className='my-4'>
             <Input label='Phone' type='text' {...register('phone')} />
           </div>
