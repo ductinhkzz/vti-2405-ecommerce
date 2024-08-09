@@ -1,4 +1,4 @@
-import { CopyBlock, dracula } from 'react-code-blocks';
+import { CodeBlock as ReactCodeBlock, dracula } from 'react-code-blocks';
 
 type CodeBlockProps = {
   code: string;
@@ -6,7 +6,7 @@ type CodeBlockProps = {
 };
 
 const CodeBlock = ({ code, language = 'typescript' }: CodeBlockProps) => (
-  <CopyBlock text={code} language={language} showLineNumbers theme={dracula} codeBlock />
+  <ReactCodeBlock text={code} language={language} showLineNumbers theme={dracula} />
 );
 
 export { CodeBlock };

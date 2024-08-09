@@ -7,7 +7,7 @@ type AccordionProps = {
   defaultOpen?: boolean;
 };
 
-const Accordion = ({ title, children, defaultOpen = true }: AccordionProps) => {
+const Accordion = ({ title, children, defaultOpen = false }: AccordionProps) => {
   return (
     <Disclosure as='div' className='p-6' defaultOpen={defaultOpen}>
       <DisclosureButton className='group flex w-full items-center justify-between'>

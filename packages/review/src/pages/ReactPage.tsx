@@ -1,5 +1,9 @@
 import { Accordion, CodeBlock, Markdown } from '../components';
 
+import TaskApp from './examples/context/Task';
+import { AddTaskCode, TaskCode, TasksContextCode, TaskListCode } from './examples/context/code';
+import { memoCode, useCallbackCode, useMemoCode } from './examples/memo';
+
 const propsEx = `
 function getImageUrl(person, size = 's') {
   return (
@@ -193,6 +197,127 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }
+`;
+
+const compositeCode = `
+const Container = ({ children }: { children: React.ReactNode }) => {
+  return <div className='container'>{children}</div>;
+};
+
+const App = () => {
+  return (
+    <Container>
+      <p>Hello world</p>
+    </Container>
+  );
+};
+`;
+
+const sendDataParentToChildCode = `
+function Parent() {
+  const data = "Hello from parent";
+
+return (
+    <Child message={data} />
+  );
+}
+// Child component
+function Child({ message }: { message: string; }) {
+  return (
+    <div>{message}</div>
+  );
+}
+`;
+
+const sendDataChildToParentCode = `
+import { useState } from 'react';
+
+const Child = ({ sendDataToParent }: { sendDataToParent: (val: string) => void }) => {
+  const [data, setData] = useState('');
+
+  const handleClick = () => {
+    sendDataToParent(data);
+  }
+
+  return (
+    <div>
+      <input type='text' value={data} onChange={(e) => setData(e.target.value)} />
+      <button onClick={handleClick}>Send Data to Parent</button>
+    </div>
+  );
+}
+
+const Parent = () => {
+  const [dataFromChild, setDataFromChild] = useState('');
+
+  const handleDataFromChild = (data: string) => {
+    setDataFromChild(data);
+  }
+
+  return (
+    <div>
+      <h1>Data from Child: {dataFromChild}</h1>
+      <Child sendDataToParent={handleDataFromChild} />
+    </div>
+  );
+}
+`;
+
+const sendDataChildsCode = `
+import React, { useState } from 'react';
+
+interface ChildAProps {
+  onDataChange: (data: string) => void;
+}
+
+const ChildA: React.FC<ChildAProps> = ({ onDataChange }) => {
+  const [input, setInput] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const sendData = () => {
+    onDataChange(input);
+  };
+
+  return (
+    <div>
+      <h2>Child A</h2>
+      <input type='text' value={input} onChange={handleChange} />
+      <button onClick={sendData}>Send Data to Child B</button>
+    </div>
+  );
+};
+
+interface ChildBProps {
+  data: string;
+}
+
+const ChildB: React.FC<ChildBProps> = ({ data }) => {
+  return (
+    <div>
+      <h2>Child B</h2>
+      <p>Received Data: {data}</p>
+    </div>
+  );
+};
+
+const Parent: React.FC = () => {
+  const [data, setData] = useState<string>('');
+
+  const handleDataChange = (newData: string) => {
+    setData(newData);
+  };
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <ChildA onDataChange={handleDataChange} />
+      <ChildB data={data} />
+    </div>
+  );
+};
 `;
 
 const ReactPage = () => {
@@ -520,6 +645,150 @@ const ReactPage = () => {
           lọc và chuyển đổi mảng dữ liệu của bạn thành một mảng các thành phần.
         </p>
         <CodeBlock language='jsx' code={renderListCode}></CodeBlock>
+      </Accordion>
+      <Accordion title='Share Data Between Components'>
+        <ul className='list-disc ps-8 font-normal space-y-4'>
+          <li>
+            <Accordion title='Composition'>
+              <CodeBlock code={compositeCode} language='jsx' />
+            </Accordion>
+          </li>
+          <li>
+            <Accordion title='Lifting State Up'>
+              <Accordion title='Send data from parent to child component (down)'>
+                <CodeBlock code={sendDataParentToChildCode} language='jsx' />
+              </Accordion>
+              <Accordion title='Send data from child to parent (up)'>
+                <CodeBlock code={sendDataChildToParentCode} language='jsx' />
+              </Accordion>
+              <Accordion title='Send data between child components'>
+                <CodeBlock code={sendDataChildsCode} language='tsx' />
+              </Accordion>
+            </Accordion>
+          </li>
+          <li>
+            <Accordion title='Context'>
+              <p>
+                Thông thường, bạn sẽ truyền thông tin từ thành phần cha sang thành phần con thông qua props. Nhưng việc
+                truyền props có thể trở nên rườm rà và bất tiện nếu bạn phải truyền chúng qua nhiều thành phần ở giữa
+                hoặc nếu nhiều thành phần trong ứng dụng của bạn cần cùng một thông tin. Context cho phép thành phần cha
+                cung cấp một số thông tin cho bất kỳ thành phần nào trong cây bên dưới nó—bất kể sâu đến đâu—mà không
+                cần truyền thông tin đó thông qua props.
+              </p>
+              <h1 className='font-semibold mt-4 mb-2'>Example</h1>
+              <TaskApp />
+              <div className='space-y-2'>
+                <Accordion title='TasksContext'>
+                  <CodeBlock code={TasksContextCode} language='tsx' />
+                </Accordion>
+                <Accordion title='AddTask'>
+                  <CodeBlock code={AddTaskCode} language='tsx' />
+                </Accordion>
+                <Accordion title='TaskList'>
+                  <CodeBlock code={TaskListCode} language='tsx' />
+                </Accordion>
+                <Accordion title='Task'>
+                  <CodeBlock code={TaskCode} language='tsx' />
+                </Accordion>
+              </div>
+            </Accordion>
+          </li>
+          <li>
+            <Accordion title='Life Cycle'>
+              <ul className='list-disc ps-8 font-normal space-y-4'>
+                <li>componentDidMount: executed after the first render .</li>
+                <li>componentDidUpdate: executed after each update.</li>
+                <li>componentWillUnmount: executed before the component is removed from the DOM.</li>
+              </ul>
+              <p className='my-4'>Sử dụng useEffect hooks: có 3 kiểu sử dụng cần nắm</p>
+              <ul>
+                <li>
+                  <CodeBlock code={`useEffect(() => {\n // Todo\n })`} />
+                  <p className='my-2'>callback call every component re-reder</p>
+                </li>
+                <li>
+                  <CodeBlock code={`useEffect(() => {\n // Todo \n}, [])`} />
+                  <p className='my-2'>callback call 1 time though component re-reder</p>
+                </li>
+                <li>
+                  <CodeBlock code={`useEffect(() => {\n // Todo \n}, [dependencies])`} />
+                  <p className='my-2'> callback call when dependencies changed</p>
+                </li>
+              </ul>
+            </Accordion>
+          </li>
+        </ul>
+      </Accordion>
+      <Accordion title='Higher Order Component: memo'>
+        <p>lets you skip re-rendering a component when its props are unchanged.</p>
+        <p className='my-4'>Example</p>
+        <CodeBlock code={memoCode} language='jsx' />
+        <p className='my-4 font-medium'>
+          React thường render lại một component bất cứ khi nào component cha render lại. Với memo, bạn có thể tạo một
+          component mà React sẽ không render lại khi component cha render lại miễn là props mới của nó giống với props
+          cũ. Một component như vậy được gọi là memoized.
+        </p>
+        <p className='my-4 font-medium'>
+          Một component của React luôn phải có logic render thuần túy. Điều này có nghĩa là nó phải trả về cùng một đầu
+          ra nếu props, state và context của nó không thay đổi. Bằng cách sử dụng memo, bạn đang cho React biết rằng
+          thành phần của bạn tuân thủ yêu cầu này, do đó React không cần phải render lại miễn là props của nó không thay
+          đổi. Ngay cả với memo, component của bạn sẽ render lại nếu trạng thái của chính nó thay đổi hoặc nếu context
+          mà nó đang sử dụng thay đổi.
+        </p>
+        <p className='my-4 font-medium'>
+          Ngay cả khi một thành phần được ghi nhớ, nó vẫn sẽ được render lại khi trạng thái của chính nó thay đổi. Ghi
+          nhớ chỉ liên quan đến các prop được truyền đến thành phần từ thành phần cha của nó.
+        </p>
+        <p className='my-4 font-medium'>
+          Khi bạn sử dụng memo, component của bạn sẽ render lại bất cứ khi nào prop nào đó không bằng giá trị trước đó.
+          Điều này có nghĩa là React sẽ so sánh mọi prop trong component của bạn với giá trị trước đó của nó bằng cách
+          sử dụng phép so sánh Object.is. Lưu ý rằng Object.is(3, 3) là true, nhưng Object.is({`{}`}, {`{}`}) là false.
+        </p>
+        <p className='my-4 font-medium'>
+          Để tận dụng tối đa memo, hãy giảm thiểu thời gian prop thay đổi. Ví dụ, nếu prop là một đối tượng, hãy ngăn
+          thành phần cha tạo lại đối tượng đó mỗi lần bằng cách sử dụng useMemo:
+        </p>
+        <p className='my-4 font-medium'>
+          useMemo is a React Hook that lets you cache the result of a calculation between re-renders.
+        </p>
+        <CodeBlock language='jsx' code={useMemoCode} />
+        <p className='my-4 font-medium'>
+          Trong JavaScript, normal function ({`function() {}`}) hoặc arrow function {`() => {}`} luôn tạo ra một hàm
+          khác, tương tự như cách object {`{}`} luôn tạo ra một object mới. Thông thường, điều này sẽ không thành vấn
+          đề, nhưng điều đó có nghĩa là các prop trong component sẽ không bao giờ giống nhau và tối ưu hóa memo của bạn
+          sẽ không hoạt động. Đây là lúc useCallback trở nên hữu ích:
+        </p>
+        <p className='my-4 font-medium'>
+          useCallback is a React Hook that lets you cache a function definition between re-renders.
+        </p>
+        <CodeBlock language='jsx' code={useCallbackCode} />
+        <p className='my-4 font-medium'>
+          Lưu ý về dependencies trong useEffect, useCallback, useMemo: không được sử dụng Reference Type: array, object,
+          function,...
+        </p>
+        <p className='my-4 font-medium'>
+          Nếu sử dụng Reference Type thì phải dụng dụng useCallback với function và useMemo với object, array
+        </p>
+        <p className='my-4 font-medium'>
+          Khi sử dụng memo thì phải sử dụng useCallback, useMemo với Reference Type và ngược lại
+        </p>
+        <p className='my-4 font-medium'>
+          Chú ý: sử dụng khi component có data props phức tạp, nhiều props, render lại nhiều lần. Tránh sử dụng vô tội
+          vạ. Vì Khi sử dụng memo, useCallback, useMemo thì nó sẽ tốn bộ nhớ
+        </p>
+      </Accordion>
+      <Accordion title='useRef vs createRef'>
+        <p className='my-4 font-medium'>
+          useRef là một hook sử dụng cùng một ref trong suốt quá trình. Nó lưu giá trị của nó giữa các lần render lại
+          trong một thành phần chức năng và không tạo một phiên bản mới của ref cho mỗi lần render lại. Nó duy trì ref
+          hiện có giữa các lần render lại.
+        </p>
+        <p className='my-4 font-medium'>
+          createRef là một hàm tạo một ref mới mỗi lần. Không giống như useRef, nó không lưu giá trị của nó giữa các lần
+          render lại, thay vào đó tạo một phiên bản mới của ref cho mỗi lần render lại. Do đó ngụ ý rằng nó không duy
+          trì ref hiện có giữa các lần render lại.
+        </p>
+        <p className='my-4 font-medium'>Node: createRef is mostly used for class components. Function components typically rely on useRef instead.</p>
       </Accordion>
     </div>
   );
