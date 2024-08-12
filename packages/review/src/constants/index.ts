@@ -9,4 +9,19 @@ export const NAV_ITEMS = [
     name: 'React',
     url: '/react',
   },
+  {
+    id: 3,
+    name: 'Redux toolkit',
+    url: '/redux',
+  },
+  {
+    id: 4,
+    name: 'React router',
+    url: '/router',
+  },
+  {
+    id: 5,
+    name: 'Form',
+    url: '/form',
+  },
 ];
