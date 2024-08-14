@@ -2,10 +2,9 @@ import React from 'react';
 import { CreditCardIcon } from '@heroicons/react/24/outline';
 
 export const NAVIGATIONS = [
-  { name: 'Product', href: '/product' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Products', href: '/collection/beds' },
+  { name: 'About us', href: '/about-us' },
+  { name: 'Contact us', href: '/contact-us' },
 ];
 
 export const BREAK_POINTS = {

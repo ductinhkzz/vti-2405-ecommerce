@@ -15,6 +15,7 @@ const Checkout = React.lazy(() => import('@/pages/checkout'));
 const OrderCompleted = React.lazy(() => import('@/pages/order/completed'));
 const ContactUs = React.lazy(() => import('@/pages/contact-us'));
 const AboutUs = React.lazy(() => import('@/pages/about-us'));
+const Innovation = React.lazy(() => import('@/pages/innovation'));
 //Account
 const Overview = React.lazy(() => import('@/pages/account/overview'));
 const Profile = React.lazy(() => import('@/pages/account/profile'));
@@ -36,6 +37,7 @@ const AllRoutes = () => {
           <Route path='/collection/:handle' element={<LoadComponent component={Collection} />} />
           <Route path='/contact-us' element={<LoadComponent component={ContactUs} />} />
           <Route path='/about-us' element={<LoadComponent component={AboutUs} />} />
+          <Route path='/innovation' element={<LoadComponent component={Innovation} />} />
           <Route path='/cart' element={<LoadComponent component={Cart} />} />
           <Route path='/checkout' element={<LoadComponent component={Checkout} />} />
           <Route path='/order/completed/:id' element={<LoadComponent component={OrderCompleted} />} />

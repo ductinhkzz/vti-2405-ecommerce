@@ -7,7 +7,7 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "scripts": {
-    "start:dev": "lerna run --ignore store-next-example dev"
+    "start:dev": "lerna run --ignore store-next-example --ignore review dev"
   },
   "dependencies": {},
   "devDependencies": {

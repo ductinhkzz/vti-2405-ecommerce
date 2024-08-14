@@ -67,7 +67,7 @@ const Footer = () => {
             <div className='w-full h-[0.5px] bg-divider-color my-4' />
             <ol>
               <li className='mb-2'>
-                <NavLink to='/why-dux/innovation' className='text-xs uppercase tracking-widest'>
+                <NavLink to='/innovation' className='text-xs uppercase tracking-widest'>
                   Innovation
                 </NavLink>
               </li>
